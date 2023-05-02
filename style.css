@@ -78,7 +78,7 @@ section#slider {
 .carousel-track-container .carousel-track {
     height: 100%;
     /* width would be 100% times the number of the images used in the slider */
-    width: 300%;
+    width: 200%;
     position: relative;
     display: flex;
     transition: 500ms ease-out;

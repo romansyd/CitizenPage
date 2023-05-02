@@ -1,10 +1,12 @@
 import { getAttachments } from "./services.js";
 
-let slidesData = {};
+// slider variables
+let sliderState = {};
 let slides;
 let slidesLenght;
-const carouselTrack = document.querySelector(".carousel-track");
 
+// slider elements
+const carouselTrack = document.querySelector(".carousel-track");
 const nextBtn = document.querySelector("#next-btn");
 const prevBtn = document.querySelector("#prev-btn");
 
@@ -28,6 +30,7 @@ const updateInd = (ind) => {
     })
 }
 
+// Update the index shows user the "number of  current slide / all slides"
 const updateAttachInd = (ind) => {
     const attachmentIndex = document.querySelector("#attachment-index");
     attachmentIndex.innerHTML = `${ind + 1} / ${slidesLenght}`;
@@ -36,9 +39,9 @@ const updateAttachInd = (ind) => {
 const changeTrack = () => {
     let imgWidth = slides[activeSlideIndex].clientWidth;
     carouselTrack.style.transform = `translateX(-${activeSlideIndex * imgWidth}px)`;
-
 }
 
+// change current slide using arrow-buttons
 const moveSlide = dir => {
     if (dir === "prev") {
         if (activeSlideIndex > 0) {
@@ -58,40 +61,39 @@ const moveSlide = dir => {
     changeTrack();
 }
 
+const appendCarouselSlides = (list = 'attachments') => {
+    sliderState[list].forEach((slide) => {
+        const template = document.createElement('div')
+        template.innerHTML = `
+            <img src="${slide.url}" alt="">
+        `;
+        template.classList.add('carousel-slide');
+        carouselTrack.append(template);
+    })
+}
+
 const renderSlider = (idx = 0) => {
     carouselTrack.innerHTML = ``;
     activeSlideIndex = 0;
     if (idx === 0) {
-        slidesData?.attachments.forEach((slide) => {
-            const template = document.createElement('div')
-            template.innerHTML = `
-                <img src="${slide.url}" alt="">
-            `;
-            template.classList.add('carousel-slide');
-            carouselTrack.append(template);
-        })
-        slidesLenght = slidesData?.attachments.length;
+        appendCarouselSlides('attachments');
+        slidesLenght = sliderState?.attachments.length;
     }
     if (idx === 1) {
-        slidesData?.outputAttachments.forEach((slide) => {
-            const template = document.createElement('div')
-            template.innerHTML = `
-                <img src="${slide.url}" alt="">
-            `;
-            template.classList.add('carousel-slide');
-            carouselTrack.append(template);
-        })
-        slidesLenght = slidesData?.attachments.length;
+        appendCarouselSlides('outputAttachments');
+        slidesLenght = sliderState?.outputAttachments.length;
     }
+    carouselTrack.style.width = `${slidesLenght*100}%`;
     slides = document.querySelectorAll(".carousel-slide");
     changeTrack();
     updateInd(idx);
     updateAttachInd(0);
 }
 
+// fetch post data here and do first render
 const start = () => {
     getAttachments().then((data) => {
-        slidesData = JSON.parse(JSON.stringify(data))
+        sliderState = JSON.parse(JSON.stringify(data))
         renderSlider();
     });
 }
