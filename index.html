@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Citizen Page</title>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-wrapper">
+            <p class="nav-title">רמתגן 100 עיר לכל החיים</p>
+        </nav>
+    </header>
+    <main>
+        <section id="info">
+            <h2 class="ticket-title">שלום רב, פנייתך טופלה</h2>
+            <p class="ticket-opendate">פתיחת פנייה: 16:32 <span style="color: #60acc4;">|</span> 23/02/2023</p>
+            <p class="ticket-number">מס' פנייה: 202302-127356</p>
+            <p class="ticket-description">תיאור פנייה: תמרור נפל</p>
+        </section>
+
+        <section id="slider">
+            <div class="carousel-container">
+                <ul class="carousel-indicator">
+                    <li class="indicator active" data-index="0"> קבצים לפני טיפול</li>
+                    <li class="indicator" data-index="1">תמונות אחרי טיפול</li>
+                </ul>
+
+                <div class="carousel-action">
+                    <div class="slide-btn btn" id="prev-btn"><img src="./prev.png" alt=""></div>
+                    <div class="slide-btn btn" id="next-btn"><img src="./next.png" alt=""></div>
+                </div>
+                <div class="carousel-track-container">
+                    <div class="shading-strip">
+                        <p id="attachment-index">1 / 2</p>
+                    </div>
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="./1.jpeg" alt=""></div>
+                        <div class="carousel-slide"><img src="./3.jpeg" alt=""></div>
+                    </div>
+                </div>
+            </div>
+            <div class="popup">
+                <button class="close-btn">X</button>
+                <img src="" alt="Popup Image">
+            </div>
+        </section>
+    </main>
+    <script src="./index.js"></script>
+</body>
+
+</html>
