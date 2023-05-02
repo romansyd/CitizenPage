@@ -1,5 +1,8 @@
-const slides = document.querySelectorAll(".carousel-slide");
-const attachmentIndex = document.querySelector("#attachment-index");
+import { getAttachments } from "./services.js";
+
+let slidesData = {};
+let slides;
+let slidesLenght;
 const carouselTrack = document.querySelector(".carousel-track");
 
 const nextBtn = document.querySelector("#next-btn");
@@ -7,35 +10,43 @@ const prevBtn = document.querySelector("#prev-btn");
 
 const indList = document.querySelector(".carousel-indicator");
 
+// POP UP
+const popup = document.querySelector('.popup');
+const closeBtn = popup.querySelector('.close-btn');
 
 let activeSlideIndex = 0;
 
+// SLIDER
 
-const updateInd = () => {
+const updateInd = (ind) => {
     let indicators = document.querySelectorAll(".indicator");
     indicators.forEach((el, idx) => {
         el.classList.remove("active");
-        attachmentIndex.textContent = `${+activeSlideIndex + 1} / 2`
-        if (idx === activeSlideIndex) {
+        if (idx === ind) {
             el.classList.add("active");
         }
     })
 }
 
+const updateAttachInd = (ind) => {
+    const attachmentIndex = document.querySelector("#attachment-index");
+    attachmentIndex.innerHTML = `${ind + 1} / ${slidesLenght}`;
+}
+
 const changeTrack = () => {
     let imgWidth = slides[activeSlideIndex].clientWidth;
     carouselTrack.style.transform = `translateX(-${activeSlideIndex * imgWidth}px)`;
-    updateInd();
+
 }
 
 const moveSlide = dir => {
-
     if (dir === "prev") {
         if (activeSlideIndex > 0) {
             activeSlideIndex--;
         } else {
             activeSlideIndex = slides.length - 1;
         }
+
     } else if (dir === "next") {
         if (activeSlideIndex < slides.length - 1) {
             activeSlideIndex++;
@@ -43,46 +54,49 @@ const moveSlide = dir => {
             activeSlideIndex = 0;
         }
     }
+    updateAttachInd(activeSlideIndex);
     changeTrack();
 }
 
-const moveSlides = idx => {
-    let diff = idx - activeSlideIndex;
-    if (diff >= 0) {
-        for (let i = 0; i < diff; i++) {
-            moveSlide("next");
-        }
-    } else {
-        diff *= -1;
-        for (let i = 0; i < diff; i++) {
-            moveSlide("prev");
-        }
+const renderSlider = (idx = 0) => {
+    carouselTrack.innerHTML = ``;
+    activeSlideIndex = 0;
+    if (idx === 0) {
+        slidesData?.attachments.forEach((slide) => {
+            const template = document.createElement('div')
+            template.innerHTML = `
+                <img src="${slide.url}" alt="">
+            `;
+            template.classList.add('carousel-slide');
+            carouselTrack.append(template);
+        })
+        slidesLenght = slidesData?.attachments.length;
     }
+    if (idx === 1) {
+        slidesData?.outputAttachments.forEach((slide) => {
+            const template = document.createElement('div')
+            template.innerHTML = `
+                <img src="${slide.url}" alt="">
+            `;
+            template.classList.add('carousel-slide');
+            carouselTrack.append(template);
+        })
+        slidesLenght = slidesData?.attachments.length;
+    }
+    slides = document.querySelectorAll(".carousel-slide");
+    changeTrack();
+    updateInd(idx);
+    updateAttachInd(0);
 }
 
-indList.addEventListener("click", e => {
-    let target = e.target;
-    if (target.classList.contains("indicator")) {
-        moveSlides(target.dataset.index);
-    }
-})
+const start = () => {
+    getAttachments().then((data) => {
+        slidesData = JSON.parse(JSON.stringify(data))
+        renderSlider();
+    });
+}
 
-nextBtn.addEventListener("click", () => {
-    moveSlide("next")
-});
-prevBtn.addEventListener("click", () => {
-    moveSlide("prev")
-});
-
-window.addEventListener("keyup", e => {
-    if (e.keyCode === 37) {
-        moveSlide("prev");
-    } else if (e.keyCode === 39) {
-        moveSlide("next");
-    }
-})
-
-window.addEventListener("resize", () => changeTrack());
+// POP UP
 
 const openImage = () => {
     const popup = document.querySelector('.popup');
@@ -104,8 +118,36 @@ const handleImageClick = e => {
     }
 }
 
-const popup = document.querySelector('.popup');
-const closeBtn = popup.querySelector('.close-btn');
+//START
+
+start();
+
+
+// EVENT LISTENERS
+
+indList.addEventListener("click", e => {
+    let target = e.target;
+    if (target.classList.contains("indicator")) {
+        renderSlider(+target.dataset.index);
+    }
+})
+
+nextBtn.addEventListener("click", () => {
+    moveSlide("next")
+});
+prevBtn.addEventListener("click", () => {
+    moveSlide("prev")
+});
+
+window.addEventListener("keyup", e => {
+    if (e.keyCode === 37) {
+        moveSlide("prev");
+    } else if (e.keyCode === 39) {
+        moveSlide("next");
+    }
+})
+
+window.addEventListener("resize", () => changeTrack());
 
 carouselTrack.addEventListener('click', handleImageClick);
 closeBtn.addEventListener('click', closePopup);
