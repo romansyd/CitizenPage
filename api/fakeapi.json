@@ -8,8 +8,8 @@
     "attachments": [
         {
             "id": 1,
-            "type": 1,
-            "url": "https://images.pexels.com/photos/14903726/pexels-photo-14903726.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            "type": 2,
+            "url": "https://www.w3schools.com/tags/horse.ogg"
         },
         {
             "id": 2,
@@ -29,14 +29,14 @@
             "url": "https://images.pexels.com/photos/2128332/pexels-photo-2128332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         },
         {
-            "id": 2,
-            "type": 2,
-            "url": "https://images.pexels.com/photos/1169374/pexels-photo-1169374.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        },
-        {
             "id": 3,
             "type": 3,
-            "url": "https://images.pexels.com/photos/2661922/pexels-photo-2661922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            "url": "https://www.w3schools.com/tags/movie.mp4"
+        },
+        {
+            "id": 4,
+            "type": 4,
+            "url": "http://127.0.0.1:5500/index.js"
         }
     ]
 }

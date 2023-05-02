@@ -71,13 +71,45 @@ const moveSlide = dir => {
 
 const appendCarouselSlides = (list = 'attachments') => {
     sliderState[list].forEach((slide) => {
-        const template = document.createElement('div')
-        template.innerHTML = `
-            <img src="${slide.url}" alt="">
-        `;
+        const template = document.createElement('div');
         template.classList.add('carousel-slide');
+        template.innerHTML = createTemplateByType(slide);
         carouselTrack.append(template);
     })
+}
+
+const createTemplateByType = (slide) => {
+    switch (slide?.type) {
+        case 1:
+            return `
+            <img src="${slide.url}" alt="">
+            `;
+        case 2:
+            return `
+            <audio controls>
+                <source src="${slide.url}" type="video/mpeg">
+                <source src="${slide.url}" type="video/ogg">
+                Your browser does not support the audio tag.
+            </audio>
+            `;
+        case 3:
+            return `
+            <video controls>
+                <source src="${slide.url}" type="video/mp4">
+                <source src="${slide.url}" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+            `;
+        case 4:
+            return`
+            <a href="${slide.url}" download>
+                <img src="./img/icons/download.png" alt="">
+                <p>הורד את הקובץ</p>
+            </a>
+            `;
+        default:
+            break;
+    }
 }
 
 const renderSlider = (idx = 0) => {
@@ -152,10 +184,10 @@ indList.addEventListener("click", e => {
 })
 
 nextBtn.addEventListener("click", () => {
-    moveSlide("next")
+    moveSlide("next");
 });
 prevBtn.addEventListener("click", () => {
-    moveSlide("prev")
+    moveSlide("prev");
 });
 
 window.addEventListener("keyup", e => {

@@ -112,6 +112,40 @@ section#slider {
     border-radius: 10px;
 }
 
+.carousel-slide video {
+    align-self: center;
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.carousel-slide audio {
+    align-self: center;
+}
+
+.carousel-slide a[download] {
+    height: 50px;
+    width: 60%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    align-self: center;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    padding: 0 10px 0 10px;
+}
+
+.carousel-slide a[download] img {
+    width: 30px;
+}
+
+.carousel-slide a[download] p {
+    align-self: center;
+    font-size: 23px;
+}
+
 .carousel-action {
     position: absolute;
     bottom: 0;
@@ -219,6 +253,7 @@ section#slider {
 }
 
 
+
 @media (min-width: 900px) {
     nav.nav-wrapper {
         padding: 0 100px 0 100px;
@@ -244,16 +279,18 @@ section#slider {
         font-size: 1.3em;
     }
 
-    .hide{
+    .hide {
         display: none;
     }
 
     section#slider {
         width: 60%;
     }
-    .shading-strip{
+
+    .shading-strip {
         width: calc(100% - 20px);
     }
+
     .carousel-track-container {
         margin-top: 10px;
         width: calc(100% - 20px);
