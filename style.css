@@ -36,7 +36,7 @@ p.nav-title {
     color: #ffffff;
 }
 
-h2.ticket-title {
+h2.ticket-opener {
     font-size: 2em;
     width: 200px;
     margin: auto;
@@ -235,7 +235,7 @@ section#slider {
         width: 30%;
     }
 
-    section#info h2.ticket-title {
+    section#info h2.ticket-opener {
         font-size: 2.5em;
         width: 250px;
     }

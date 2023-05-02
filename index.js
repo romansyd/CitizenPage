@@ -4,6 +4,16 @@ import { getAttachments } from "./services.js";
 let sliderState = {};
 let slides;
 let slidesLenght;
+let activeSlideIndex = 0;
+
+// ticket data information
+
+const ticket = {
+    opener: document.querySelector(".ticket-opener"),
+    opendate: document.querySelector(".ticket-opendate"),
+    number: document.querySelector(".ticket-number"),
+    description: document.querySelector(".ticket-description")
+};
 
 // slider elements
 const carouselTrack = document.querySelector(".carousel-track");
@@ -15,8 +25,6 @@ const indList = document.querySelector(".carousel-indicator");
 // POP UP
 const popup = document.querySelector('.popup');
 const closeBtn = popup.querySelector('.close-btn');
-
-let activeSlideIndex = 0;
 
 // SLIDER
 
@@ -83,18 +91,27 @@ const renderSlider = (idx = 0) => {
         appendCarouselSlides('outputAttachments');
         slidesLenght = sliderState?.outputAttachments.length;
     }
-    carouselTrack.style.width = `${slidesLenght*100}%`;
+    carouselTrack.style.width = `${slidesLenght * 100}%`;
     slides = document.querySelectorAll(".carousel-slide");
     changeTrack();
     updateInd(idx);
     updateAttachInd(0);
 }
 
+// set ticket info in fields in section info 
+const setTicketInfo = (data) => {
+    ticket.number.textContent = `${data.ticketNo} :מס' פנייה`;
+    ticket.description.textContent = `${data.descr} :תיאור פנייה`;
+    ticket.opendate.textContent = `${data.openDate} :פתיחת פנייה`;
+    ticket.opener.textContent = data.openerName;
+}
+
 // fetch post data here and do first render
 const start = () => {
     getAttachments().then((data) => {
-        sliderState = JSON.parse(JSON.stringify(data))
+        sliderState = JSON.parse(JSON.stringify(data));
         renderSlider();
+        setTicketInfo(data.data);
     });
 }
 
