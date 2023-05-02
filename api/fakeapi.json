@@ -1,0 +1,60 @@
+{
+    "data": {
+        "ticketNo": "2023-1002",
+        "descr": "some description for the ticket#1002",
+        "openDate": "1/1/2023",
+        "openerName": "שלום ישראלי"
+    },
+    "ˇ": [
+        {
+            "id": 1,
+            "type": 1,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/1.jpg?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=ebanvU6CsKkYkkmlAULMXVWC8ZY%3D"
+        },
+        {
+            "id": 2,
+            "type": 1,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/2.jpg?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=4qZnfFZXnOg9eH1q6E639CiBHhk%3D"
+        },
+        {
+            "id": 3,
+            "type": 1,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/3.jpg?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=jnlnBHb5%2B6Z40ccD9KeIOV%2F2ihg%3D"
+        },
+        {
+            "id": 4,
+            "type": 1,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/4.png?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=jriwaofCYc5jdM1e813qZ33Ch1M%3D"
+        },
+        {
+            "id": 5,
+            "type": 2,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/5.mp3?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=bBG7YBaAm%2F4DjF9VUgBhfbF4oqg%3D"
+        },
+        {
+            "id": 6,
+            "type": 3,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/6.mp4?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=R9Q9gGJUQXSHE9dMomQ0fj%2BLyKM%3D"
+        },
+        {
+            "id": 7,
+            "type": 4,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/7.pdf?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=HjAqTcNVT%2Fv9if1wdzQAWxrOtpM%3D"
+        },
+        {
+            "id": 8,
+            "type": 4,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/8.docx?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=yy%2B4e4RijbDvRfYsSUNixwU5Br0%3D"
+        },
+        {
+            "id": 9,
+            "type": 4,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/9.xlsx?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=Agwjls5AfGWbWzZass1q9JV%2FF90%3D"
+        },
+        {
+            "id": 10,
+            "type": 4,
+            "url": "https://test-web-netalizer.s3.amazonaws.com/test/upload2/1002/10.txt?AWSAccessKeyId=AKIAQ7BDPC6QLJSUKPXF&Expires=1682431199&Signature=E1XMP2RmZbyx8daTrDf7vV%2Fys%2Bc%3D"
+        }
+    ]
+}
