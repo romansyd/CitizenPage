@@ -86,14 +86,16 @@ section#slider {
 }
 
 .shading-strip {
-    overflow: hidden;
     position: absolute;
     bottom: 10px;
     width: 94%;
     height: 40px;
-    background: rgba(0, 0, 0, 0.7);
     border-radius: 0 0 10px 10px;
     z-index: 99;
+}
+
+.shading-strip-dark {
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .carousel-slide {

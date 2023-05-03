@@ -34,6 +34,10 @@ const updateInd = (ind) => {
     indicators.forEach((el, idx) => {
         el.classList.remove("active");
         if (idx === ind) {
+            sliderState = {
+                ...sliderState, 
+                activeTab: idx === 0 ? 'attachments' : 'outputAttachments'
+            }
             el.classList.add("active");
         }
     })
@@ -42,6 +46,15 @@ const updateInd = (ind) => {
 // Update the index shows user the "number of  current slide / all slides"
 const updateAttachInd = (ind) => {
     const attachmentIndex = document.querySelector("#attachment-index");
+    const shadingStrip = document.querySelector(".shading-strip");
+
+    shadingStrip.classList.remove('shading-strip-dark');
+
+    //sliderState.attachments | sliderState.outputAttachments current slide is IMG
+    if (sliderState[sliderState.activeTab][ind].type === 1) {
+        shadingStrip.classList.add('shading-strip-dark');
+    }
+
     attachmentIndex.innerHTML = `${ind + 1} / ${slidesLenght}`;
 }
 
