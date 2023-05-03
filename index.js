@@ -6,6 +6,16 @@ let slides;
 let slidesLenght;
 let activeSlideIndex = 0;
 
+const sliderTabNames = [
+    'attachments',
+    'outputAttachments'
+];
+
+const infoTabNames = [
+    'data',
+    'outputData'
+];
+
 // ticket data information
 
 const ticket = {
@@ -35,8 +45,8 @@ const updateInd = (ind) => {
         el.classList.remove("active");
         if (idx === ind) {
             sliderState = {
-                ...sliderState, 
-                activeTab: idx === 0 ? 'attachments' : 'outputAttachments'
+                ...sliderState,
+                activeTab: idx
             }
             el.classList.add("active");
         }
@@ -50,8 +60,11 @@ const updateAttachInd = (ind) => {
 
     shadingStrip.classList.remove('shading-strip-dark');
 
+    const { activeTab } = sliderState;
+    const activeTabName = sliderTabNames[activeTab];
+
     //sliderState.attachments | sliderState.outputAttachments current slide is IMG
-    if (sliderState[sliderState.activeTab][ind].type === 1) {
+    if (sliderState[activeTabName][ind].type === 1) {
         shadingStrip.classList.add('shading-strip-dark');
     }
 
@@ -147,17 +160,23 @@ const renderSlider = (idx = 0) => {
 
 // set ticket info in fields in section info 
 const setTicketInfo = (data) => {
-    ticket.number.textContent = `${data.ticketNo} :מס' פנייה`;
-    ticket.description.textContent = `${data.descr} :תיאור פנייה`;
-    ticket.opendate.textContent = `${data.openDate} :פתיחת פנייה`;
-    ticket.opener.textContent = data.openerName;
+    const { activeTab } = sliderState;
+    const activeTabName = infoTabNames[activeTab];
+    const infoData = data[activeTabName];
+
+    if (Object.keys(infoData).length !== 0) {
+        ticket.number.textContent = `${infoData.ticketNo} :מס' פנייה`;
+        ticket.description.textContent = `${infoData.descr} :תיאור פנייה`;
+        ticket.opendate.textContent = `${infoData.openDate} :פתיחת פנייה`;
+        ticket.opener.textContent = infoData.openerName;
+    }
 }
 
 const errorHandler = (data) => {
     if (data.code === undefined) {
         carousel.classList.remove("hide");
         renderSlider();
-        setTicketInfo(data.data);
+        setTicketInfo(data);
     } else {
         ticket.opener.textContent = data?.message;
         carousel.classList.add("hide");
