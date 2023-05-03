@@ -36,7 +36,7 @@ p.nav-title {
     color: #ffffff;
 }
 
-h2.ticket-opener {
+h2.ticket-title {
     font-size: 2em;
     width: 200px;
     margin: auto;
@@ -91,7 +91,7 @@ section#slider {
     width: 94%;
     height: 40px;
     border-radius: 0 0 10px 10px;
-    z-index: 99;
+    z-index: 9;
 }
 
 .shading-strip-dark {
@@ -163,7 +163,7 @@ section#slider {
 
 .carousel-action .slide-btn {
     cursor: pointer;
-    z-index: 100;
+    z-index: 9;
 }
 
 .btn {
@@ -230,16 +230,54 @@ section#slider {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.8);
-    z-index: 999;
+    z-index: 99;
 }
 
 .open {
     display: flex;
 }
 
-.popup img {
-    max-width: 100%;
-    max-height: auto;
+.popup-img-wrapper {
+    position: relative;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #60acc4;
+    border-radius: 5px;
+}
+
+.popup .slide-btn {
+    position: absolute;
+    z-index: 9;
+}
+
+.popup-img-wrapper .close-btn {
+    margin-top: 3%;
+    margin-right: 3%;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.popup-img-wrapper .close-btn img{
+    width: 26px;
+}
+
+#popup-prev-btn {
+    left: 0px;
+}
+
+#popup-next-btn {
+    right: 0px;
+}
+
+.popup .popup-img {
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
 }
 
 .close-btn {
@@ -274,7 +312,7 @@ section#slider {
         width: 30%;
     }
 
-    section#info h2.ticket-opener {
+    section#info h2.ticket-title {
         font-size: 2.5em;
         width: 250px;
     }

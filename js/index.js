@@ -10,7 +10,7 @@ let activeSlideIndex = 0;
 // ticket data information
 
 const ticket = {
-    title: document.querySelector(".ticket-opener"),
+    title: document.querySelector(".ticket-title"),
     opendate: document.querySelector(".ticket-opendate"),
     number: document.querySelector(".ticket-number"),
     description: document.querySelector(".ticket-description")
@@ -21,6 +21,8 @@ const carousel = document.querySelector(".carousel-container");
 const carouselTrack = document.querySelector(".carousel-track");
 const nextBtn = document.querySelector("#next-btn");
 const prevBtn = document.querySelector("#prev-btn");
+const popupNextBtn = document.querySelector("#popup-next-btn");
+const popupPrevBtn = document.querySelector("#popup-prev-btn");
 
 const indList = document.querySelector(".carousel-indicator");
 
@@ -185,7 +187,7 @@ const start = () => {
 
 const openImage = () => {
     const popup = document.querySelector('.popup');
-    const popupImg = popup.querySelector('img');
+    const popupImg = popup.querySelector('.popup-img');
     const activeSlide = slides[activeSlideIndex];
     const activeImgSrc = activeSlide.querySelector('img').getAttribute('src');
     popupImg.setAttribute('src', activeImgSrc);
@@ -222,6 +224,15 @@ nextBtn.addEventListener("click", () => {
 });
 prevBtn.addEventListener("click", () => {
     moveSlide("prev");
+});
+
+popupNextBtn.addEventListener("click", () => {
+    moveSlide("next");
+    openImage();
+});
+popupPrevBtn.addEventListener("click", () => {
+    moveSlide("prev");
+    openImage();
 });
 
 window.addEventListener("keyup", e => {

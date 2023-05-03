@@ -17,7 +17,7 @@
     </header>
     <main>
         <section id="info">
-            <h2 class="ticket-opener">שלום רב, פנייתך טופלה</h2>
+            <h2 class="ticket-title">שלום רב, פנייתך טופלה</h2>
             <p class="ticket-opendate"></p>
             <p class="ticket-number"></p>
             <p class="ticket-description"></p>
@@ -38,19 +38,22 @@
                         <p id="attachment-index">1 / 2</p>
                     </div>
                     <div class="carousel-track">
-                        <!-- <div class="carousel-slide"><img src="./img/1.jpeg" alt=""></div>
-                        <div class="carousel-slide"><img src="./img/3.jpeg" alt=""></div> -->
                     </div>
                 </div>
             </div>
             <div class="popup">
-                <button class="close-btn">X</button>
-                <img src="" alt="Popup Image">
+                <div class="slide-btn btn" id="popup-prev-btn"><img src="./img/icons/prev.png" alt=""></div>
+                <div class="popup-img-wrapper">
+                    <button class="close-btn"><img src="./img/icons/close.png"></button>
+                    <img class="popup-img" src="" alt="Popup Image">
+                </div>
+                <div class="slide-btn btn" id="popup-next-btn"><img src="./img/icons/next.png" alt=""></div>
             </div>
         </section>
     </main>
-    <script type="module" src="./services.js"></script>
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./js/strings.js"></script>
+    <script type="module" src="./js/services.js"></script>
+    <script type="module" src="./js/index.js"></script>
 </body>
 
 </html>
