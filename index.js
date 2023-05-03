@@ -19,7 +19,6 @@ const infoTabNames = [
 // ticket data information
 
 const ticket = {
-    opener: document.querySelector(".ticket-opener"),
     opendate: document.querySelector(".ticket-opendate"),
     number: document.querySelector(".ticket-number"),
     description: document.querySelector(".ticket-description")
@@ -168,7 +167,6 @@ const setTicketInfo = (data) => {
         ticket.number.textContent = `${infoData.ticketNo} :מס' פנייה`;
         ticket.description.textContent = `${infoData.descr} :תיאור פנייה`;
         ticket.opendate.textContent = `${infoData.openDate} :פתיחת פנייה`;
-        ticket.opener.textContent = infoData.openerName;
     }
 }
 
