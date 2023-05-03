@@ -11,16 +11,32 @@ const getTokenFromURL = () =>{
         }
     }
 }
+const responseValidator = (data) => {
+    switch (data?.code) {
+        case undefined:
+            return {message: 'OK'};
+        case 1:
+            return {message: 'Invalid Request'};
+        case 2:
+            return {message: 'Invalid Token'};
+        case 3:
+            return {message: 'Token Expired'};
+        default:
+            return {message: 'Invalid Request'};
+    }
+}
 
 export async function getAttachments() {
-    // if (getTokenFromURL() === NO_TOKEN) {
-    //     return {code: 2};
-    // } else {
-        return fetch("./api/fakeapi.json", {
+    if (getTokenFromURL() === NO_TOKEN) {
+        const code = {code: 2};
+        return {...responseValidator(code), ...code};
+    } else {
+        const response = await fetch("./api/fakeapi.json", {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
             }
         }).then((data) => data.json());
-    // }
+        return {...response, ...responseValidator(response)};
+    }
 }

@@ -252,7 +252,9 @@ section#slider {
     cursor: pointer;
 }
 
-
+.hide {
+    display: none;
+}
 
 @media (min-width: 900px) {
     nav.nav-wrapper {
@@ -277,10 +279,6 @@ section#slider {
 
     section#info p {
         font-size: 1.3em;
-    }
-
-    .hide {
-        display: none;
     }
 
     section#slider {

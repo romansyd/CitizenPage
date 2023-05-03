@@ -16,6 +16,7 @@ const ticket = {
 };
 
 // slider elements
+const carousel = document.querySelector(".carousel-container");
 const carouselTrack = document.querySelector(".carousel-track");
 const nextBtn = document.querySelector("#next-btn");
 const prevBtn = document.querySelector("#prev-btn");
@@ -45,6 +46,8 @@ const updateAttachInd = (ind) => {
 }
 
 const changeTrack = () => {
+    carouselTrack.style.width = `${slidesLenght * 100}%`;
+    slides = document.querySelectorAll(".carousel-slide");
     let imgWidth = slides[activeSlideIndex].clientWidth;
     carouselTrack.style.transform = `translateX(-${activeSlideIndex * imgWidth}px)`;
 }
@@ -101,7 +104,7 @@ const createTemplateByType = (slide) => {
             </video>
             `;
         case 4:
-            return`
+            return `
             <a href="${slide.url}" download>
                 <img src="./img/icons/download.png" alt="">
                 <p>הורד את הקובץ</p>
@@ -115,17 +118,16 @@ const createTemplateByType = (slide) => {
 const renderSlider = (idx = 0) => {
     carouselTrack.innerHTML = ``;
     activeSlideIndex = 0;
-    if (idx === 0) {
+    if (idx === 0 && sliderState.attachments !== undefined) {
         appendCarouselSlides('attachments');
         slidesLenght = sliderState?.attachments.length;
+        changeTrack();
     }
-    if (idx === 1) {
+    if (idx === 1 && sliderState.outputAttachments !== undefined) {
         appendCarouselSlides('outputAttachments');
         slidesLenght = sliderState?.outputAttachments.length;
+        changeTrack();
     }
-    carouselTrack.style.width = `${slidesLenght * 100}%`;
-    slides = document.querySelectorAll(".carousel-slide");
-    changeTrack();
     updateInd(idx);
     updateAttachInd(0);
 }
@@ -138,12 +140,22 @@ const setTicketInfo = (data) => {
     ticket.opener.textContent = data.openerName;
 }
 
+const errorHandler = (data) => {
+    if (data.code === undefined) {
+        carousel.classList.remove("hide");
+        renderSlider();
+        setTicketInfo(data.data);
+    } else {
+        ticket.opener.textContent = data?.message;
+        carousel.classList.add("hide");
+    }
+}
+
 // fetch post data here and do first render
 const start = () => {
     getAttachments().then((data) => {
         sliderState = JSON.parse(JSON.stringify(data));
-        renderSlider();
-        setTicketInfo(data.data);
+        errorHandler(data)
     });
 }
 
