@@ -8,13 +8,13 @@
     "attachments": [
         {
             "id": 1,
-            "type": 2,
-            "url": "https://www.w3schools.com/tags/horse.ogg"
+            "type": 1,
+            "url": "https://images.pexels.com/photos/2361520/pexels-photo-2361520.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         },
         {
             "id": 2,
             "type": 1,
-            "url": "https://images.pexels.com/photos/2361520/pexels-photo-2361520.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            "url": "https://images.pexels.com/photos/1686440/pexels-photo-1686440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         },
         {
             "id": 3,
@@ -29,14 +29,19 @@
             "url": "https://images.pexels.com/photos/2128332/pexels-photo-2128332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         },
         {
+            "id": 2,
+            "type": 1,
+            "url": "https://images.pexels.com/photos/2833723/pexels-photo-2833723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        },
+        {
             "id": 3,
-            "type": 3,
-            "url": "https://www.w3schools.com/tags/movie.mp4"
+            "type": 1,
+            "url": "https://images.pexels.com/photos/2065849/pexels-photo-2065849.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         },
         {
             "id": 4,
-            "type": 4,
-            "url": "http://127.0.0.1:5500/index.js"
+            "type": 1,
+            "url": "https://images.pexels.com/photos/2590513/pexels-photo-2590513.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         }
     ]
 }
