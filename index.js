@@ -1,4 +1,5 @@
 import { getAttachments } from "./services.js";
+import {Texts} from "./strings.js";
 
 // slider variables
 let sliderState = {};
@@ -6,19 +7,10 @@ let slides;
 let slidesLenght;
 let activeSlideIndex = 0;
 
-const sliderTabNames = [
-    'attachments',
-    'outputAttachments'
-];
-
-const infoTabNames = [
-    'data',
-    'outputData'
-];
-
 // ticket data information
 
 const ticket = {
+    title: document.querySelector(".ticket-opener"),
     opendate: document.querySelector(".ticket-opendate"),
     number: document.querySelector(".ticket-number"),
     description: document.querySelector(".ticket-description")
@@ -60,7 +52,7 @@ const updateAttachInd = (ind) => {
     shadingStrip.classList.remove('shading-strip-dark');
 
     const { activeTab } = sliderState;
-    const activeTabName = sliderTabNames[activeTab];
+    const activeTabName = Texts.sliderTabNames[activeTab];
 
     //sliderState.attachments | sliderState.outputAttachments current slide is IMG
     if (sliderState[activeTabName][ind].type === 1) {
@@ -160,7 +152,7 @@ const renderSlider = (idx = 0) => {
 // set ticket info in fields in section info 
 const setTicketInfo = (data) => {
     const { activeTab } = sliderState;
-    const activeTabName = infoTabNames[activeTab];
+    const activeTabName = Texts.infoTabNames[activeTab];
     const infoData = data[activeTabName];
 
     if (Object.keys(infoData).length !== 0) {
@@ -176,7 +168,7 @@ const errorHandler = (data) => {
         renderSlider();
         setTicketInfo(data);
     } else {
-        ticket.opener.textContent = data?.message;
+        ticket.title.textContent = data?.message;
         carousel.classList.add("hide");
     }
 }
