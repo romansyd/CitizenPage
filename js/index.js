@@ -7,10 +7,6 @@ let slides;
 let slidesLenght;
 let activeSlideIndex = 0;
 
-//for slide by swipes
-let touchstartX = 0;
-let touchendX = 0;
-
 // ticket data information
 
 const ticket = {
@@ -167,17 +163,6 @@ const start = () => {
     });
 }
 
-//SWIPES
-
-function handleSwipe() {
-    if (touchendX < touchstartX) {
-        moveSlide("next");
-    }
-    if (touchendX > touchstartX) {
-        moveSlide("prev");
-    }
-}
-
 //START
 
 start();
@@ -205,15 +190,6 @@ window.addEventListener("keyup", e => {
     } else if (e.keyCode === 39) {
         moveSlide("next");
     }
-});
-
-carousel.addEventListener("touchstart", (event) => {
-    touchstartX = event.changedTouches[0].screenX;
-});
-
-carousel.addEventListener("touchend", (event) => {
-    touchendX = event.changedTouches[0].screenX;
-    handleSwipe();
 });
 
 window.addEventListener("resize", () => changeTrack());
