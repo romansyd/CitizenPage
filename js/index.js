@@ -30,10 +30,6 @@ const popupPrevBtn = document.querySelector("#popup-prev-btn");
 
 const indList = document.querySelector(".carousel-indicator");
 
-// POP UP
-const popup = document.querySelector('.popup');
-const closeBtn = popup.querySelector('.close-btn');
-
 // SLIDER
 
 const updateInd = (ind) => {
@@ -110,22 +106,6 @@ const createTemplateByType = (slide) => {
             return `
             <img src="${slide.url}" alt="">
             `;
-        case 2:
-            return `
-            <audio controls>
-                <source src="${slide.url}" type="video/mpeg">
-                <source src="${slide.url}" type="video/ogg">
-                Your browser does not support the audio tag.
-            </audio>
-            `;
-        case 3:
-            return `
-            <video controls>
-                <source src="${slide.url}" type="video/mp4">
-                <source src="${slide.url}" type="video/ogg">
-                Your browser does not support the video tag.
-            </video>
-            `;
         case 4:
             return `
             <a href="${slide.url}" download>
@@ -187,28 +167,6 @@ const start = () => {
     });
 }
 
-// POP UP
-
-const openImage = () => {
-    const popup = document.querySelector('.popup');
-    const popupImg = popup.querySelector('.popup-img');
-    const activeSlide = slides[activeSlideIndex];
-    const activeImgSrc = activeSlide.querySelector('img').getAttribute('src');
-    popupImg.setAttribute('src', activeImgSrc);
-    popup.classList.add('open');
-}
-
-const closePopup = () => {
-    const popup = document.querySelector('.popup');
-    popup.classList.remove('open');
-}
-
-const handleImageClick = e => {
-    if (e.target.tagName === 'IMG') {
-        openImage();
-    }
-}
-
 //SWIPES
 
 function handleSwipe() {
@@ -241,15 +199,6 @@ prevBtn.addEventListener("click", () => {
     moveSlide("prev");
 });
 
-popupNextBtn.addEventListener("click", () => {
-    moveSlide("next");
-    openImage();
-});
-popupPrevBtn.addEventListener("click", () => {
-    moveSlide("prev");
-    openImage();
-});
-
 window.addEventListener("keyup", e => {
     if (e.keyCode === 37) {
         moveSlide("prev");
@@ -268,6 +217,3 @@ carousel.addEventListener("touchend", (event) => {
 });
 
 window.addEventListener("resize", () => changeTrack());
-
-carouselTrack.addEventListener('click', handleImageClick);
-closeBtn.addEventListener('click', closePopup);

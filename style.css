@@ -116,17 +116,6 @@ section#slider {
     border-radius: 10px;
 }
 
-.carousel-slide video {
-    align-self: center;
-    height: 100%;
-    width: auto;
-    border-radius: 10px;
-}
-
-.carousel-slide audio {
-    align-self: center;
-}
-
 .carousel-slide a[download] {
     height: 50px;
     width: 60%;
