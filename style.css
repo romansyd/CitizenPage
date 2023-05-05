@@ -132,16 +132,17 @@ section#slider {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
-    padding: 0 10px 0 10px;
+    padding: 0 30px 0 30px;
 }
 
 .carousel-slide a[download] img {
     width: 30px;
+    position: relative;
 }
 
 .carousel-slide a[download] p {
     align-self: center;
-    font-size: 23px;
+    font-size: 1.1em;
 }
 
 .carousel-action {
