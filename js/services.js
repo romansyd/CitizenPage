@@ -56,7 +56,6 @@ export async function getAttachments() {
             });
 
         if (!response.ok) {
-            console.log('not ok', responseStatusValidator(response));
             return responseStatusValidator(response);
         }
 
