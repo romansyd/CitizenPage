@@ -21,8 +21,6 @@ const carousel = document.querySelector(".carousel-container");
 const carouselTrack = document.querySelector(".carousel-track");
 const nextBtn = document.querySelector("#next-btn");
 const prevBtn = document.querySelector("#prev-btn");
-const popupNextBtn = document.querySelector("#popup-next-btn");
-const popupPrevBtn = document.querySelector("#popup-prev-btn");
 
 const indList = document.querySelector(".carousel-indicator");
 

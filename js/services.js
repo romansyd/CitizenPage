@@ -1,4 +1,4 @@
-import {Texts} from "./strings.js";
+import { Texts } from "./strings.js";
 
 const NO_TOKEN = 'NO_TOKEN',
     HOME_URL = './api/fakeapi.json',
@@ -22,13 +22,21 @@ const responseValidator = (data) => {
         case undefined:
             return { message: Texts.Ok_code };
         case 1:
-            return { message: Texts.ErrorCode_1  };
+            return { message: Texts.ErrorCode_1 };
         case 2:
-            return { message: Texts.ErrorCode_2  };
+            return { message: Texts.ErrorCode_2 };
         case 3:
-            return { message: Texts.ErrorCode_3  };
+            return { message: Texts.ErrorCode_3 };
         default:
-            return { message:  Texts.ErrorCode_2 };
+            return { message: Texts.ErrorCode_2 };
+    }
+}
+
+const responseStatusValidator = (res) => {
+    if (res.ok) {
+        return res;
+    } else {
+        return { code: 4, message: Texts.Err_res_not_ok }
     }
 }
 
@@ -45,7 +53,14 @@ export async function getAttachments() {
                 headers: {
                     'Accept': 'application/json'
                 }
-            }).then((data) => data.json());
-        return { ...response, ...responseValidator(response) };
+            });
+
+        if (!response.ok) {
+            console.log('not ok', responseStatusValidator(response));
+            return responseStatusValidator(response);
+        }
+
+        const data = await response.json();
+        return { ...data, ...responseValidator(data) };
     }
 }
