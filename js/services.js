@@ -1,9 +1,10 @@
 import { Texts } from "./strings.js";
 
 const NO_TOKEN = 'NO_TOKEN',
-    HOME_URL = './api/fakeapi.json',
-    ORG_ID = '123',
-    PROFILE_NAME = 'name';
+    // HOME_URL = './api/fakeapi.json',
+    HOME_URL = 'https://dev.netalizer.com/GazpachoApi2/extEntity',
+    ORG_ID = '4137',
+    PROFILE_NAME = 'ticket_get';
 
 const getTokenFromURL = () => {
     const hash = window.location.hash;
@@ -33,7 +34,7 @@ const responseValidator = (data) => {
 }
 
 const responseStatusValidator = (res) => {
-    if (res.ok) {
+    if (res?.ok) {
         return res;
     } else {
         return { code: 4, message: Texts.Err_res_not_ok }
@@ -47,7 +48,7 @@ export async function getAttachments() {
         return { ...responseValidator(code), ...code };
     } else {
         const response = await fetch(
-            `${HOME_URL}?orgId=${ORG_ID}?p=${PROFILE_NAME}?k=${token}`,
+            `${HOME_URL}?orgId=${ORG_ID}&p=${PROFILE_NAME}&k=${token}`,
             {
                 method: 'GET',
                 headers: {
@@ -55,11 +56,11 @@ export async function getAttachments() {
                 }
             });
 
-        if (!response.ok) {
+        if (!response?.ok) {
             return responseStatusValidator(response);
         }
 
-        const data = await response.json();
+        const data = await response?.json();
         return { ...data, ...responseValidator(data) };
     }
 }
