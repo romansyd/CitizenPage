@@ -157,11 +157,17 @@ const errorHandler = (data) => {
     }
 }
 
+const offlineModeHandler = ()=>{
+    const main = document.querySelector('main');
+    main.innerHTML = `<h2 class="ticket-title">${Texts.Err_offline_mode}</h1>`;
+}
+
 // fetch post data here and do first render
 const start = () => {
     getAttachments().then((data) => {
         sliderState = JSON.parse(JSON.stringify(data));
         errorHandler(data)
+        window.removeEventListener('offline', offlineModeHandler, true);
     });
 }
 
@@ -182,6 +188,8 @@ start();
 
 
 // EVENT LISTENERS
+
+window.addEventListener('offline', offlineModeHandler, true);
 
 indList.addEventListener("click", e => {
     let target = e.target;
@@ -215,7 +223,3 @@ carousel.addEventListener("touchend", (event) => {
 });
 
 window.addEventListener("resize", () => changeTrack());
-window.addEventListener('offline', ()=>{
-    const main = document.querySelector('main');
-    main.innerHTML = `<h2 class="ticket-title">${Texts.Err_offline_mode}</h1>`;
-})
