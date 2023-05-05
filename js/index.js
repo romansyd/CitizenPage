@@ -215,3 +215,7 @@ carousel.addEventListener("touchend", (event) => {
 });
 
 window.addEventListener("resize", () => changeTrack());
+window.addEventListener('offline', ()=>{
+    const main = document.querySelector('main');
+    main.innerHTML = `<h2 class="ticket-title">${Texts.Err_offline_mode}</h1>`;
+})
