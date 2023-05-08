@@ -28,6 +28,12 @@ const prevBtn = document.querySelector("#prev-btn");
 
 const indList = document.querySelector(".carousel-indicator");
 
+// POP UP
+const popup = document.querySelector('.popup');
+const closeBtn = popup.querySelector('.close-btn');
+const popupNextBtn = document.querySelector("#popup-next-btn");
+const popupPrevBtn = document.querySelector("#popup-prev-btn");
+
 // SLIDER
 
 const updateInd = (ind) => {
@@ -90,20 +96,40 @@ const moveSlide = dir => {
 }
 
 const appendCarouselSlides = (list = 'attachments') => {
-    sliderState[list].forEach((slide) => {
+    sliderState[list].forEach((slide, i) => {
         const template = document.createElement('div');
         template.classList.add('carousel-slide');
-        template.innerHTML = createTemplateByType(slide);
-        carouselTrack.append(template);
+            template.append(createTemplateByType(slide, i));
+            carouselTrack.append(template);
+            template.innerHTML = createTemplateByType(slide, i);
+            carouselTrack.append(template);
     })
 }
 
-const createTemplateByType = (slide) => {
+
+
+const createTemplateByType = (slide, i) => {
     switch (slide?.type) {
         case 1:
             return `
             <img src="${slide.url}" alt="">
             `;
+        case 2:
+            return `
+                <audio controls id="audio_${i}">
+                    <source src="${slide.url}" type="video/mpeg">
+                    <source src="${slide.url}" type="video/ogg">
+                    Your browser does not support the audio tag.
+                </audio>
+                `;
+        case 3:
+            return `
+                <video controls>
+                    <source src="${slide.url}" type="video/mp4">
+                    <source src="${slide.url}" type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
+        `;
         case 4:
             return `
             <a href="${slide.url}" download>
@@ -157,7 +183,7 @@ const errorHandler = (data) => {
     }
 }
 
-const offlineModeHandler = ()=>{
+const offlineModeHandler = () => {
     const main = document.querySelector('main');
     main.innerHTML = `<h2 class="ticket-title">${Texts.Err_offline_mode}</h1>`;
 }
@@ -166,9 +192,59 @@ const offlineModeHandler = ()=>{
 const start = () => {
     getAttachments().then((data) => {
         sliderState = JSON.parse(JSON.stringify(data));
-        errorHandler(data)
+        errorHandler(data);
         window.removeEventListener('offline', offlineModeHandler, true);
     });
+}
+
+// POP UP
+const openMedia = () => {
+    const { activeTab } = sliderState;
+    const activeTabName = Texts.sliderTabNames[activeTab];
+
+    if (sliderState[activeTabName][activeSlideIndex].type === 1) {
+        openImage();
+    }
+    if (sliderState[activeTabName][activeSlideIndex].type === 2) {
+        openAudio();
+    }
+    if (sliderState[activeTabName][activeSlideIndex].type === 3) {
+        openVideo();
+    }
+    if (sliderState[activeTabName][activeSlideIndex].type === 4) {
+        closePopup();
+    }
+}
+
+const openImage = () => {
+    const popup = document.querySelector('.popup');
+    const popupImg = popup.querySelector('.popup-img');
+    const activeSlide = slides[activeSlideIndex];
+    const activeImgSrc = activeSlide.querySelector('img').getAttribute('src');
+    popupImg.setAttribute('src', activeImgSrc);
+    popup.classList.add('open');
+}
+const openVideo = () => {
+    const id = activeSlideIndex;
+    const video = document.getElementById(`video_${id}`);
+    console.log(video);
+}
+const openAudio = () => {
+    const id = activeSlideIndex;
+    const audio = document.getElementById(`audio_${id}`);
+    console.log(audio);
+}
+
+const closePopup = () => {
+    const popup = document.querySelector('.popup');
+    popup.classList.remove('open');
+}
+
+const handleImageClick = e => {
+    console.log(e.target.tagName);
+    if (e.target.tagName === 'IMG') {
+        openImage();
+    }
 }
 
 //SWIPES
@@ -185,7 +261,6 @@ function handleSwipe() {
 //START
 
 start();
-
 
 // EVENT LISTENERS
 
@@ -204,6 +279,25 @@ nextBtn.addEventListener("click", () => {
 prevBtn.addEventListener("click", () => {
     moveSlide("prev");
 });
+
+popupNextBtn.addEventListener("click", () => {
+    moveSlide("next");
+    openMedia();
+});
+
+popupPrevBtn.addEventListener("click", () => {
+    moveSlide("prev");
+    openMedia();
+});
+
+carouselTrack.addEventListener('click', handleImageClick);
+closeBtn.addEventListener('click', closePopup);
+
+popup.addEventListener('click', (e) => {
+    if (e.target.classList.value === "popup open") {
+        closePopup();
+    }
+})
 
 window.addEventListener("keyup", e => {
     if (e.keyCode === 37) {
