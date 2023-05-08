@@ -293,6 +293,19 @@ section#slider {
 .hide {
     display: none;
 }
+.converted{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.converted span{
+    font-size: 1.3em;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
 
 @media (min-width: 900px) {
     nav.nav-wrapper {

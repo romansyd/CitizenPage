@@ -99,10 +99,21 @@ const appendCarouselSlides = (list = 'attachments') => {
     sliderState[list].forEach((slide, i) => {
         const template = document.createElement('div');
         template.classList.add('carousel-slide');
-            template.append(createTemplateByType(slide, i));
-            carouselTrack.append(template);
-            template.innerHTML = createTemplateByType(slide, i);
-            carouselTrack.append(template);
+        template.append(createTemplateByType(slide, i));
+        carouselTrack.append(template);
+        template.innerHTML = createTemplateByType(slide, i);
+        if (slide.type === 3 || slide.type === 2) {
+            template.querySelector('source').addEventListener("error", (e) => {
+                const videoToLink = { ...slide, type: 4 }
+                template.innerHTML = `
+                <div class="converted">
+                    <span>${Texts.Err_media}</span>
+                    ${createTemplateByType(videoToLink, i)}
+                </div>
+                `
+            });
+        }
+        carouselTrack.append(template);
     })
 }
 

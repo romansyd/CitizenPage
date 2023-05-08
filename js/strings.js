@@ -5,6 +5,7 @@ export const Texts = {
     ErrorCode_3: "Token Expired",
     Err_res_not_ok: "Sorry, something went wrong.",
     Err_offline_mode: "You went offline, the page can not be loaded.",
+    Err_media: "Sorry, that content cannot be displayed.",
     sliderTabNames: [
         'attachments',
         'outputAttachments'
