@@ -22,6 +22,16 @@ h2 {
     text-align: center;
 }
 
+.info-field {
+    direction: rtl;
+    text-align: center;
+}
+
+.info-field p,
+span {
+    display: inline;
+}
+
 nav.nav-wrapper {
     background-color: #009EBD;
     background-color: #009EBD;
@@ -33,8 +43,8 @@ nav.nav-wrapper {
 }
 
 .nav-logo {
-    width: 80%; 
-    height: 80%; 
+    width: 80%;
+    height: 80%;
     object-fit: contain;
 }
 
@@ -68,7 +78,7 @@ section#slider {
     width: calc(100vw - 20px);
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .carousel-track-container {
@@ -316,7 +326,8 @@ video::-webkit-media-controls-play-button{
 .hide {
     display: none;
 }
-.converted{
+
+.converted {
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -324,7 +335,8 @@ video::-webkit-media-controls-play-button{
     align-items: center;
     text-align: center;
 }
-.converted span{
+
+.converted span {
     font-size: 1.3em;
     color: #ffffff;
     margin-bottom: 10px;
@@ -364,7 +376,7 @@ video::-webkit-media-controls-play-button{
     
 }
 @media (min-width: 900px) {
-    .nav-logo{
+    .nav-logo {
         margin-right: 50px;
         object-position: right top;
     }
@@ -395,9 +407,10 @@ video::-webkit-media-controls-play-button{
         margin: auto;
     }
 
-    .carousel-container{
+    .carousel-container {
         width: 100%;
     }
+
     .shading-strip {
         /* position: absolute; */
         width: calc(100% - 40px);

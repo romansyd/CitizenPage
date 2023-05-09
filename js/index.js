@@ -205,9 +205,9 @@ const setTicketInfo = (data) => {
     const infoData = data[activeTabName];
 
     if (Object.keys(infoData).length !== 0) {
-        ticket.number.textContent = `${infoData.ticketNo} :מס' פנייה`;
-        ticket.description.textContent = `${infoData.descr} :תיאור פנייה`;
-        ticket.opendate.textContent = `${infoData.openDate} :פתיחת פנייה`;
+        ticket.number.textContent = infoData.ticketNo;
+        ticket.description.textContent = infoData.descr;
+        ticket.opendate.textContent = infoData.openDate;
     }
 }
 
