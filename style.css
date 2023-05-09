@@ -23,7 +23,7 @@ h2 {
 }
 
 nav.nav-wrapper {
-    background-color: #2596be;
+    background-color: #009EBD;
     width: 100%;
     height: 70px;
     display: flex;
@@ -31,9 +31,10 @@ nav.nav-wrapper {
     align-items: center;
 }
 
-p.nav-title {
-    font-size: 1.5em;
-    color: #ffffff;
+.nav-logo {
+    width: 80%; 
+    height: 80%; 
+    object-fit: contain;
 }
 
 h2.ticket-title {
@@ -308,9 +309,9 @@ section#slider {
 }
 
 @media (min-width: 900px) {
-    nav.nav-wrapper {
-        padding: 0 100px 0 100px;
-        justify-content: flex-end;
+    .nav-logo{
+        margin-right: 50px;
+        object-position: right top;
     }
 
     main {
