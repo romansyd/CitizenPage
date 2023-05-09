@@ -128,18 +128,24 @@ const createTemplateByType = (slide, i) => {
         case 2:
             return `
                 <audio controls id="audio_${i}">
-                    <source src="${slide.url}" type="video/mpeg">
-                    <source src="${slide.url}" type="video/ogg">
+                    <source src="${slide.url}" type="audio/mpeg">
+                    <source src="${slide.url}" type="audio/mp3">
+                    <source src="${slide.url}" type="audio/ogg">
                     Your browser does not support the audio tag.
                 </audio>
                 `;
         case 3:
             return `
-                <video controls>
-                    <source src="${slide.url}" type="video/mp4">
-                    <source src="${slide.url}" type="video/ogg">
-                    Your browser does not support the video tag.
-                </video>
+                <div class="video-wrapper">
+                    <video controls>
+                        <source src="${slide.url}" type="video/mp4">
+                        <source src="${slide.url}" type="video/ogg">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="controls">
+                        <img src="./img/icons/play.png" class="playpause">
+                    </div>
+                </div>
         `;
         case 4:
             return `
@@ -152,6 +158,20 @@ const createTemplateByType = (slide, i) => {
             break;
     }
 }
+
+function changeButtonState(type) {
+    if (type === "playpause") {
+      // Play/Pause button
+      if (video.paused || video.ended) {
+        playpause.setAttribute("data-state", "play");
+      } else {
+        playpause.setAttribute("data-state", "pause");
+      }
+    } else if (type === "mute") {
+      // Mute button
+      mute.setAttribute("data-state", video.muted ? "unmute" : "mute");
+    }
+  }
 
 const renderSlider = (idx = 0) => {
     carouselTrack.innerHTML = ``;
@@ -300,6 +320,7 @@ popupPrevBtn.addEventListener("click", () => {
     moveSlide("prev");
     openMedia();
 });
+
 
 carouselTrack.addEventListener('click', handleImageClick);
 closeBtn.addEventListener('click', closePopup);
