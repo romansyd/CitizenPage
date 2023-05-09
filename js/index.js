@@ -113,11 +113,33 @@ const appendCarouselSlides = (list = 'attachments') => {
                 `
             });
         }
+        if (slide.type === 3) {
+            const player = template.querySelector('video'),
+                playButton = template.querySelector('.playpause');
+
+            player.addEventListener('touchstart', () => {
+                playPauseHandler(player, playButton);
+            })
+            player.addEventListener('click', (e) => {
+                e.preventDefault();
+                playPauseHandler(player, playButton);
+            })
+        }
         carouselTrack.append(template);
     })
 }
 
-
+const playPauseHandler = (player, playButton) => {
+    if (player.paused && !player.ended) {
+        console.log('hide');
+        playButton.classList.add('hide');
+        player.play();
+    } else {
+        console.log('play');
+        playButton.classList.remove('hide');
+        player.pause();
+    }
+}
 
 const createTemplateByType = (slide, i) => {
     switch (slide?.type) {
@@ -137,7 +159,7 @@ const createTemplateByType = (slide, i) => {
         case 3:
             return `
                 <div class="video-wrapper">
-                    <video controls>
+                    <video controls dataset="paused">
                         <source src="${slide.url}" type="video/mp4">
                         <source src="${slide.url}" type="video/ogg">
                         Your browser does not support the video tag.
@@ -158,20 +180,6 @@ const createTemplateByType = (slide, i) => {
             break;
     }
 }
-
-function changeButtonState(type) {
-    if (type === "playpause") {
-      // Play/Pause button
-      if (video.paused || video.ended) {
-        playpause.setAttribute("data-state", "play");
-      } else {
-        playpause.setAttribute("data-state", "pause");
-      }
-    } else if (type === "mute") {
-      // Mute button
-      mute.setAttribute("data-state", video.muted ? "unmute" : "mute");
-    }
-  }
 
 const renderSlider = (idx = 0) => {
     carouselTrack.innerHTML = ``;
@@ -272,8 +280,7 @@ const closePopup = () => {
 }
 
 const handleImageClick = e => {
-    console.log(e.target.tagName);
-    if (e.target.tagName === 'IMG') {
+    if (e.target.tagName === 'IMG' && !e.target.classList.contains('playpause')) {
         openImage();
     }
 }
