@@ -329,6 +329,8 @@ const errorHandler = (data) => {
         setTicketInfo(data);
     } else {
         ticket.title.textContent = data?.message;
+        const infoField = document.querySelectorAll('.info-field');
+        infoField.forEach(el => el.innerHTML = ``);
         carousel.classList.add("hide");
     }
 }
