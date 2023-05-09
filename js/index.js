@@ -125,6 +125,98 @@ const appendCarouselSlides = (list = 'attachments') => {
                 playPauseHandler(player, playButton);
             })
         }
+        if (slide.type === 2) {
+            /** Implementation of the presentation of the audio player */
+
+            const playIconContainer = template.querySelector('.playpause');
+            const audioPlayerContainer = template.querySelector('.audio-container');
+            const seekSlider = template.querySelector('.seek-slider');
+            let playState = 'play';
+
+            playIconContainer.addEventListener('click', () => {
+                if (playState === 'play') {
+                    audio.play();
+                    requestAnimationFrame(whilePlaying);
+                    playState = 'pause';
+                } else {
+                    audio.pause();
+                    cancelAnimationFrame(raf);
+                    playState = 'play';
+                }
+            });
+
+            const showRangeProgress = (rangeInput) => {
+                if (rangeInput === seekSlider) audioPlayerContainer.style.setProperty('--seek-before-width', rangeInput.value / rangeInput.max * 100 + '%');
+                else audioPlayerContainer.style.setProperty('--volume-before-width', rangeInput.value / rangeInput.max * 100 + '%');
+            }
+
+            seekSlider.addEventListener('input', (e) => {
+                showRangeProgress(e.target);
+            });
+
+
+            /** Implementation of the functionality of the audio player */
+
+            const audio = template.querySelector('audio');
+            const durationContainer = template.querySelector('.duration');
+            const currentTimeContainer = template.querySelector('.current-time');
+            let raf = null;
+
+            const calculateTime = (secs) => {
+                const minutes = Math.floor(secs / 60);
+                const seconds = Math.floor(secs % 60);
+                const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+                return `${minutes}:${returnedSeconds}`;
+            }
+
+            const displayDuration = () => {
+                durationContainer.textContent = calculateTime(audio.duration);
+            }
+
+            const setSliderMax = () => {
+                seekSlider.max = Math.floor(audio.duration);
+            }
+
+            const displayBufferedAmount = () => {
+                const bufferedAmount = Math.floor(audio.buffered.end(audio.buffered.length - 1));
+                audioPlayerContainer.style.setProperty('--buffered-width', `${(bufferedAmount / seekSlider.max) * 100}%`);
+            }
+
+            const whilePlaying = () => {
+                seekSlider.value = Math.floor(audio.currentTime);
+                currentTimeContainer.textContent = calculateTime(seekSlider.value);
+                audioPlayerContainer.style.setProperty('--seek-before-width', `${seekSlider.value / seekSlider.max * 100}%`);
+                raf = requestAnimationFrame(whilePlaying);
+            }
+
+            if (audio.readyState > 0) {
+                displayDuration();
+                setSliderMax();
+                displayBufferedAmount();
+            } else {
+                audio.addEventListener('loadedmetadata', () => {
+                    displayDuration();
+                    setSliderMax();
+                    displayBufferedAmount();
+                });
+            }
+
+            audio.addEventListener('progress', displayBufferedAmount);
+
+            seekSlider.addEventListener('input', () => {
+                currentTimeContainer.textContent = calculateTime(seekSlider.value);
+                if (!audio.paused) {
+                    cancelAnimationFrame(raf);
+                }
+            });
+
+            seekSlider.addEventListener('change', () => {
+                audio.currentTime = seekSlider.value;
+                if (!audio.paused) {
+                    requestAnimationFrame(whilePlaying);
+                }
+            });
+        }
         carouselTrack.append(template);
     })
 }
@@ -149,16 +241,35 @@ const createTemplateByType = (slide, i) => {
             `;
         case 2:
             return `
-                <audio controls id="audio_${i}">
-                    <source src="${slide.url}" type="audio/mpeg">
-                    <source src="${slide.url}" type="audio/mp3">
-                    <source src="${slide.url}" type="audio/ogg">
-                    Your browser does not support the audio tag.
-                </audio>
+                <div class="media-wrapper audio-container">
+                    <audio preload="metadata">
+                        <source src="${slide.url}" type="audio/mpeg">
+                        <source src="${slide.url}" type="audio/mp3">
+                        <source src="${slide.url}" type="audio/ogg">
+                        Your browser does not support the audio tag.</audio>
+                    <img src="./img/icons/play.png" class="playpause">
+                    <div class="audio-background">
+                        <div class="audio-background-col per30"></div>
+                        <div class="audio-background-col per50"></div>
+                        <div class="audio-background-col per70"></div>
+                        <div class="audio-background-col per40"></div>
+
+                        <div class="audio-background-col per30"></div>
+                        <div class="audio-background-col per50"></div>
+                        <div class="audio-background-col per70"></div>
+                        <div class="audio-background-col per40"></div>
+                    </div>
+
+                    <div class="audio-controls">
+                        <span class="time current-time">0:00</span>
+                        <input type="range" class="seek-slider" max="100" value="0">
+                        <span class="time duration">0:00</span>
+                    </div>
+                </div>
                 `;
         case 3:
             return `
-                <div class="video-wrapper">
+                <div class="media-wrapper">
                     <video controls dataset="paused">
                         <source src="${slide.url}" type="video/mp4">
                         <source src="${slide.url}" type="video/ogg">
@@ -356,3 +467,4 @@ carousel.addEventListener("touchend", (event) => {
 });
 
 window.addEventListener("resize", () => changeTrack());
+
