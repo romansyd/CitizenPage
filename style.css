@@ -502,3 +502,9 @@ audio::-webkit-media-controls-panel {
         border-radius: 10px;
     }
 }
+
+@media (min-width: 1500px) {
+    .carousel-slide video {
+        width: 70%;
+    }
+}
