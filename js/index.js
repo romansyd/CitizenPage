@@ -113,6 +113,25 @@ const appendCarouselSlides = (list = 'attachments') => {
                 `
             });
         }
+        if (slide.type === 1) {
+            template.classList.add('image');
+        }
+        if (slide.type === 2) {
+            template.classList.add('audio');
+        }
+        if (slide.type === 3) {
+            template.classList.add('video');
+
+            const player = template.querySelector('video');
+            player.addEventListener('loadeddata',function () {
+                let width = player.offsetWidth;
+                let height = player.offsetHeight;
+                if (height > width) {
+                    template.classList.add('vertical');
+                }
+            });
+        }
+        
         if (slide.type === 3) {
             const player = template.querySelector('video'),
                 playButton = template.querySelector('.playpause');

@@ -171,6 +171,10 @@ audio::-webkit-media-controls-panel {
     border-radius: 0px;
 }
 
+.carousel-slide.video {
+    height: calc(100% - 40px);
+}
+
 .carousel-slide a[download] {
     height: 50px;
     width: 60%;
@@ -372,9 +376,19 @@ audio::-webkit-media-controls-panel {
         overflow: hidden;
     }
 
-    .carousel-slide video {
-        /* position: absolute; */
+    .carousel-slide.video .media-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .carousel-slide.video.vertical video {
         height: 100%;
+        width: auto;
+    }
+
+    .carousel-slide video {
+        position: absolute;
+        height: auto;
         width: 100%;
         object-fit: contain;
     }
@@ -454,14 +468,25 @@ audio::-webkit-media-controls-panel {
         width: 100%;
         border-radius: 10px; */
     }
+    .carousel-slide.video .media-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-slide.video.vertical video {
+        height: 100%;
+        width: auto;
+    }
 
     .carousel-slide video {
-        /* position: absolute; */
-        height: 100%;
+        position: absolute;
+        height: auto;
         width: 100%;
         align-self: center;
         object-fit: contain;
     }
+    
 
     .carousel-indicator .indicator {
         padding: 0 10px 0 10px;
