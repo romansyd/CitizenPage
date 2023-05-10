@@ -12,7 +12,7 @@ body {
 }
 
 main {
-    height: calc(100% - 70px);
+    height: calc(100vh - 70px);
     display: flex;
     flex-direction: column;
 }
@@ -132,8 +132,10 @@ section#slider {
     width: 100%;
     border-radius: 10px;
     object-fit: contain;
+    padding: 0 3px;
 }
-.media-wrapper .playpause{
+
+.media-wrapper .playpause {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -143,26 +145,30 @@ section#slider {
     z-index: 99;
 }
 
-.media-wrapper{
+.media-wrapper {
     /* position: absolute; */
     align-self: center;
     border-radius: 10px;
+    padding: 0 3px;
 }
 
 
-video::-webkit-media-controls-mute-button{
+video::-webkit-media-controls-mute-button {
     display: none;
 }
-video::-webkit-media-controls-play-button{
+
+video::-webkit-media-controls-play-button {
     display: none;
 }
+
 /* video::-webkit-media-controls-panel{
     margin-bottom: 50px;
     background: unset;
 } */
-audio::-webkit-media-controls-panel{
+audio::-webkit-media-controls-panel {
     border-radius: 0px;
 }
+
 .carousel-slide a[download] {
     height: 50px;
     width: 60%;
@@ -351,23 +357,26 @@ audio::-webkit-media-controls-panel{
     color: #ffffff;
     margin-bottom: 10px;
 }
+
 @media (max-width: 899px) {
-    section #slider{
+    section #slider {
         height: 100%;
         overflow: hidden;
-        
+
     }
-    .carousel-container{
+
+    .carousel-container {
         /* height: 100%; */
         overflow: hidden;
     }
+
     .carousel-slide video {
         /* position: absolute; */
         height: 100%;
         width: 100%;
         object-fit: contain;
     }
-   
+
     /* .carousel-slide video::-webkit-media-controls-panel {
         position: absolute;
         align-self: center;
@@ -375,12 +384,13 @@ audio::-webkit-media-controls-panel{
         width: 100%;
         border-radius: 10px;
     } */
-    
+
     .carousel-slide audio {
         align-self: center;
     }
-    
+
 }
+
 @media (min-width: 900px) {
     .nav-logo {
         margin-right: 50px;
@@ -442,6 +452,7 @@ audio::-webkit-media-controls-panel{
         width: 100%;
         border-radius: 10px; */
     }
+
     .carousel-slide video {
         /* position: absolute; */
         height: 100%;
