@@ -77,6 +77,8 @@ const changeTrack = () => {
 
 // change current slide using arrow-buttons
 const moveSlide = dir => {
+    document.querySelectorAll('video').forEach(video => video.pause());
+    document.querySelectorAll('audio').forEach(audio => audio.pause());
     if (dir === "prev") {
         if (activeSlideIndex > 0) {
             activeSlideIndex--;
