@@ -119,11 +119,16 @@ const appendCarouselSlides = (list = 'attachments') => {
 
             player.addEventListener('touchstart', () => {
                 playPauseHandler(player, playButton);
-            })
+            });
+
+            playButton.addEventListener('click', (e) => {
+                playPauseHandler(player, playButton);
+            });
+
             player.addEventListener('click', (e) => {
                 e.preventDefault();
                 playPauseHandler(player, playButton);
-            })
+            });
         }
         if (slide.type === 2) {
             /** Implementation of the presentation of the audio player */
@@ -223,12 +228,12 @@ const appendCarouselSlides = (list = 'attachments') => {
 
 const playPauseHandler = (player, playButton) => {
     if (player.paused && !player.ended) {
-        console.log('hide');
         playButton.classList.add('hide');
         player.play();
     } else {
-        console.log('play');
-        playButton.classList.remove('hide');
+        setTimeout(() => {
+            playButton.classList.remove('hide');
+        }, 100)
         player.pause();
     }
 }
