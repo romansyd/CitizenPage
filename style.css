@@ -485,6 +485,7 @@ audio::-webkit-media-controls-panel {
         width: 100%;
         align-self: center;
         object-fit: contain;
+        padding: 0 5px;
     }
     
 
