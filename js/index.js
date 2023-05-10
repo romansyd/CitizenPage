@@ -420,6 +420,8 @@ const closePopup = () => {
 const handleImageClick = e => {
     if (e.target.tagName === 'IMG' && !e.target.classList.contains('playpause')) {
         openImage();
+    } else {
+        closePopup();
     }
 }
 
