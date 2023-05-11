@@ -326,7 +326,7 @@ const createTemplateByType = (slide, i) => {
         `;
         case 4:
             return `
-            <a href="${slide.url}" download>
+            <a href="${slide.url}" download target="_blank">
                 <img src="./img/icons/download.png" alt="">
                 <p>הורד את הקובץ</p>
             </a>

@@ -64,6 +64,10 @@ section#info p {
     font-weight: bold;
 }
 
+section#info span {
+    font-size: 1.1em;
+}
+
 section#slider {
     width: 100%;
     display: flex;
@@ -444,6 +448,7 @@ audio::-webkit-media-controls-panel {
 
     section#info {
         width: 30%;
+        margin: auto;
     }
 
     section#info h2.ticket-title {
@@ -452,6 +457,10 @@ audio::-webkit-media-controls-panel {
     }
 
     section#info p {
+        font-size: 1.3em;
+    }
+
+    section#info span {
         font-size: 1.3em;
     }
 
