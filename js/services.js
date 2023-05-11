@@ -37,7 +37,7 @@ const responseStatusValidator = (res) => {
     if (res?.ok) {
         return res;
     } else {
-        return { code: 4, message: Texts.Err_res_not_ok }
+        return { code: 4, message: Texts.Err_res_not_ok };
     }
 }
 
@@ -47,22 +47,26 @@ export async function getAttachments() {
         const code = { code: 2 };
         return { ...responseDataValidator(code), ...code };
     } else {
-        const response = await fetch(
-            `${HOME_URL}?orgId=${ORG_ID}&p=${PROFILE_NAME}&k=${token}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
         try {
-            const data = await response?.json();
-            return { ...data, ...responseDataValidator(data) };
-        } catch (error) {
-            if (!response?.ok) {
-                return responseStatusValidator(response);
+            const response = await fetch(
+                `${HOME_URL}?orgId=${ORG_ID}&p=${PROFILE_NAME}&k=${token}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+    
+            try {
+                const data = await response?.json();
+                return { ...data, ...responseDataValidator(data) };
+            } catch (error) {
+                if (!response?.ok) {
+                    return responseStatusValidator(response);
+                }
             }
+        } catch (error) {
+            return { code: 4, message: Texts.Err_res_not_ok };
         }
     }
 }
