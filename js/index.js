@@ -55,9 +55,6 @@ const updateInd = (ind) => {
 // Update the index shows user the "number of  current slide / all slides"
 const updateAttachInd = (ind) => {
     const attachmentIndex = document.querySelector("#attachment-index");
-    const shadingStrip = document.querySelector(".shading-strip");
-
-    shadingStrip.classList.remove('shading-strip-dark');
 
     const { activeTab } = sliderState;
     const activeTabName = Texts.sliderTabNames[activeTab];
@@ -65,11 +62,6 @@ const updateAttachInd = (ind) => {
     if (sliderState[activeTabName] === undefined) {
         attachmentIndex.innerHTML = `${ind} / 0`;
         return;
-    }
-
-    //sliderState.attachments | sliderState.outputAttachments current slide is IMG
-    if (sliderState[activeTabName][ind].type === 1) {
-        shadingStrip.classList.add('shading-strip-dark');
     }
 
     attachmentIndex.innerHTML = `${ind + 1} / ${slidesLenght}`;
