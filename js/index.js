@@ -339,8 +339,8 @@ const createTemplateByType = (slide, i) => {
 const renderSlider = (idx = 0) => {
     carouselTrack.innerHTML = ``;
     activeSlideIndex = 0;
-
     showSlideButtons();
+
     if (idx === 0 && sliderState.attachments !== undefined && sliderState.attachments.length !== 0) {
         appendCarouselSlides('attachments');
         slidesLenght = sliderState?.attachments.length;
@@ -362,6 +362,7 @@ const renderSlider = (idx = 0) => {
     changeTrack();
     updateInd(idx);
     updateAttachInd(0);
+    setTicketInfo();
 }
 
 const hideSlideButtons = () => {
@@ -374,14 +375,21 @@ const showSlideButtons = () => {
 }
 
 // set ticket info in fields in section info 
-const setTicketInfo = (data) => {
+const setTicketInfo = () => {
     const { activeTab } = sliderState;
     const activeTabName = Texts.infoTabNames[activeTab];
-    const infoData = data[activeTabName];
+    const infoData = sliderState[activeTabName];
 
-    if (Object.keys(infoData).length !== 0) {
+    if (infoData?.ticketNo) {
+        ticket.number.parentElement.querySelector('span').textContent = "פתיחת פנייה:";
         ticket.number.textContent = infoData.ticketNo;
+    }
+    if (infoData?.descr) {
+        ticket.description.parentElement.querySelector('span').textContent = "מס' פנייה:";
         ticket.description.textContent = infoData.descr;
+    }
+    if (infoData?.openDate) {
+        ticket.opendate.parentElement.querySelector('span').textContent = "תיאור פנייה:";
         ticket.opendate.textContent = infoData.openDate;
     }
 }
@@ -390,7 +398,7 @@ const errorHandler = (data) => {
     if (data.code === undefined) {
         carousel.classList.remove("hide");
         renderSlider();
-        setTicketInfo(data);
+
     } else {
         ticket.title.textContent = data?.message;
         const infoField = document.querySelectorAll('.info-field');
