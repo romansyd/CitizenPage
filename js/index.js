@@ -58,8 +58,9 @@ const updateAttachInd = (ind) => {
 
     const { activeTab } = sliderState;
     const activeTabName = Texts.sliderTabNames[activeTab];
+    const slidesInActiveTab = sliderState[activeTabName];
 
-    if (sliderState[activeTabName] === undefined) {
+    if (slidesInActiveTab === undefined || slidesInActiveTab?.length === 0) {
         attachmentIndex.innerHTML = `${ind} / 0`;
         return;
     }
