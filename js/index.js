@@ -341,11 +341,11 @@ const renderSlider = (idx = 0) => {
     activeSlideIndex = 0;
 
     showSlideButtons();
-    if (idx === 0 && sliderState.attachments !== undefined) {
+    if (idx === 0 && sliderState.attachments !== undefined && sliderState.attachments.length !== 0) {
         appendCarouselSlides('attachments');
         slidesLenght = sliderState?.attachments.length;
     } else {
-        if (idx === 1 && sliderState.outputAttachments !== undefined) {
+        if (idx === 1 && sliderState.outputAttachments !== undefined && sliderState.outputAttachments.length !== 0) {
             appendCarouselSlides('outputAttachments');
             slidesLenght = sliderState?.outputAttachments.length;
         } else {
