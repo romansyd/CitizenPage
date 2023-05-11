@@ -65,7 +65,7 @@ const updateAttachInd = (ind) => {
         attachmentIndex.innerHTML = `${ind} / 0`;
         return;
     }
-    
+
     openPopupBtn.classList.remove('hide');
     if (sliderState[activeTabName][ind].type !== 1) {
         openPopupBtn.classList.add('hide');
@@ -424,9 +424,14 @@ const start = () => {
 const openMedia = () => {
     const { activeTab } = sliderState;
     const activeTabName = Texts.sliderTabNames[activeTab];
+    const slidesElements = carouselTrack.querySelectorAll('.carousel-slide');
 
     if (sliderState[activeTabName][activeSlideIndex].type === 1) {
-        openImage();
+        if (!isBrokenImage(slidesElements, activeSlideIndex)) {
+            openImage();
+        } else {
+            closePopup();
+        }
     }
     if (sliderState[activeTabName][activeSlideIndex].type === 2) {
         closePopup()
@@ -437,6 +442,11 @@ const openMedia = () => {
     if (sliderState[activeTabName][activeSlideIndex].type === 4) {
         closePopup();
     }
+}
+
+const isBrokenImage = (nodelist, ind) => {
+    const slide = nodelist[ind].querySelector('.error-img');
+    return !!slide;
 }
 
 const openImage = () => {
@@ -465,7 +475,7 @@ const handleImageClick = e => {
     const { activeTab } = sliderState;
     const activeTabName = Texts.sliderTabNames[activeTab];
     const currentSlideType = sliderState[activeTabName][activeSlideIndex]?.type;
-    
+
     if (e.target.tagName === 'IMG' && currentSlideType === 1) {
         openImage();
     } else {
