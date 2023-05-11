@@ -462,7 +462,11 @@ const closePopup = () => {
 }
 
 const handleImageClick = e => {
-    if (e.target.tagName === 'IMG' ) {
+    const { activeTab } = sliderState;
+    const activeTabName = Texts.sliderTabNames[activeTab];
+    const currentSlideType = sliderState[activeTabName][activeSlideIndex]?.type;
+    
+    if (e.target.tagName === 'IMG' && currentSlideType === 1) {
         openImage();
     } else {
         closePopup();
