@@ -351,7 +351,7 @@ const renderSlider = (idx = 0) => {
         } else {
             const noSliders = document.createElement('div');
             noSliders.classList.add('no-attach');
-            noSliders.innerText = "No attachment";
+            noSliders.innerText = "לא ניתן להציג צרופה";
             slidesLenght = 0;
             carouselTrack.innerHTML = '';
             carouselTrack.append(noSliders);
