@@ -18,7 +18,7 @@ const getTokenFromURL = () => {
         }
     }
 }
-const responseValidator = (data) => {
+const responseDataValidator = (data) => {
     switch (data?.code) {
         case undefined:
             return { message: Texts.Ok_code };
@@ -45,7 +45,7 @@ export async function getAttachments() {
     const token = getTokenFromURL();
     if (token === NO_TOKEN) {
         const code = { code: 2 };
-        return { ...responseValidator(code), ...code };
+        return { ...responseDataValidator(code), ...code };
     } else {
         const response = await fetch(
             `${HOME_URL}?orgId=${ORG_ID}&p=${PROFILE_NAME}&k=${token}`,
@@ -56,11 +56,13 @@ export async function getAttachments() {
                 }
             });
 
-        if (!response?.ok) {
-            return responseStatusValidator(response);
+        try {
+            const data = await response?.json();
+            return { ...data, ...responseDataValidator(data) };
+        } catch (error) {
+            if (!response?.ok) {
+                return responseStatusValidator(response);
+            }
         }
-
-        const data = await response?.json();
-        return { ...data, ...responseValidator(data) };
     }
 }
