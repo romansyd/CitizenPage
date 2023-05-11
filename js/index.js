@@ -22,7 +22,9 @@ const ticket = {
 
 // slider elements
 const carousel = document.querySelector(".carousel-container");
+const carouselAction = document.querySelector('.carousel-action');
 const carouselTrack = document.querySelector(".carousel-track");
+
 const nextBtn = document.querySelector("#next-btn");
 const prevBtn = document.querySelector("#prev-btn");
 
@@ -60,6 +62,11 @@ const updateAttachInd = (ind) => {
     const { activeTab } = sliderState;
     const activeTabName = Texts.sliderTabNames[activeTab];
 
+    if (sliderState[activeTabName] === undefined) {
+        attachmentIndex.innerHTML = `${ind} / 0`;
+        return;
+    }
+
     //sliderState.attachments | sliderState.outputAttachments current slide is IMG
     if (sliderState[activeTabName][ind].type === 1) {
         shadingStrip.classList.add('shading-strip-dark');
@@ -69,10 +76,15 @@ const updateAttachInd = (ind) => {
 }
 
 const changeTrack = () => {
-    carouselTrack.style.width = `${slidesLenght * 100}%`;
-    slides = document.querySelectorAll(".carousel-slide");
-    let imgWidth = slides[activeSlideIndex].clientWidth;
-    carouselTrack.style.transform = `translateX(-${activeSlideIndex * imgWidth}px)`;
+    if (slidesLenght) {
+        carouselTrack.style.width = `${slidesLenght * 100}%`;
+        slides = document.querySelectorAll(".carousel-slide");
+        let imgWidth = slides[activeSlideIndex].clientWidth;
+        carouselTrack.style.transform = `translateX(-${activeSlideIndex * imgWidth}px)`;
+    } else {
+        carouselTrack.style.width = `100%`;
+        carouselTrack.style.transform = `translateX(0px)`;
+    }
 }
 
 // change current slide using arrow-buttons
@@ -119,7 +131,7 @@ const appendCarouselSlides = (list = 'attachments') => {
         if (slide.type === 1) {
             template.classList.add('image');
             template.querySelector('img').onerror = () => {
-                template.querySelector('img').outerHTML='<div class="error-img">לא ניתן להציג את התמונה</div>';
+                template.querySelector('img').outerHTML = '<div class="error-img">לא ניתן להציג את התמונה</div>';
             }
         }
 
@@ -131,7 +143,7 @@ const appendCarouselSlides = (list = 'attachments') => {
             template.classList.add('video');
 
             const player = template.querySelector('video');
-            player.addEventListener('loadeddata',function () {
+            player.addEventListener('loadeddata', function () {
                 let width = player.offsetWidth;
                 let height = player.offsetHeight;
                 if (height > width) {
@@ -327,18 +339,38 @@ const createTemplateByType = (slide, i) => {
 const renderSlider = (idx = 0) => {
     carouselTrack.innerHTML = ``;
     activeSlideIndex = 0;
+
+    showSlideButtons();
     if (idx === 0 && sliderState.attachments !== undefined) {
         appendCarouselSlides('attachments');
         slidesLenght = sliderState?.attachments.length;
-        changeTrack();
+    } else {
+        if (idx === 1 && sliderState.outputAttachments !== undefined) {
+            appendCarouselSlides('outputAttachments');
+            slidesLenght = sliderState?.outputAttachments.length;
+        } else {
+            const noSliders = document.createElement('div');
+            noSliders.classList.add('no-attach');
+            noSliders.innerText = "No attachment";
+            slidesLenght = 0;
+            carouselTrack.innerHTML = '';
+            carouselTrack.append(noSliders);
+            hideSlideButtons();
+        }
     }
-    if (idx === 1 && sliderState.outputAttachments !== undefined) {
-        appendCarouselSlides('outputAttachments');
-        slidesLenght = sliderState?.outputAttachments.length;
-        changeTrack();
-    }
+
+    changeTrack();
     updateInd(idx);
     updateAttachInd(0);
+}
+
+const hideSlideButtons = () => {
+    const buttons = carouselAction.querySelectorAll('.slide-btn');
+    buttons.forEach(el => el.classList.add('hide'));
+}
+const showSlideButtons = () => {
+    const buttons = carouselAction.querySelectorAll('.slide-btn');
+    buttons.forEach(el => el.classList.remove('hide'));
 }
 
 // set ticket info in fields in section info 
