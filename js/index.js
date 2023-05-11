@@ -422,10 +422,10 @@ const openMedia = () => {
         openImage();
     }
     if (sliderState[activeTabName][activeSlideIndex].type === 2) {
-        openAudio();
+        closePopup()
     }
     if (sliderState[activeTabName][activeSlideIndex].type === 3) {
-        openVideo();
+        closePopup();
     }
     if (sliderState[activeTabName][activeSlideIndex].type === 4) {
         closePopup();
@@ -455,7 +455,7 @@ const closePopup = () => {
 }
 
 const handleImageClick = e => {
-    if (e.target.tagName === 'IMG' && !e.target.classList.contains('playpause')) {
+    if (e.target.tagName === 'IMG' ) {
         openImage();
     } else {
         closePopup();
