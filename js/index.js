@@ -32,7 +32,8 @@ const indList = document.querySelector(".carousel-indicator");
 
 // POP UP
 const popup = document.querySelector('.popup');
-const closeBtn = popup.querySelector('.close-btn');
+const openPopupBtn = document.querySelector('.zoom-button');
+const closePopupBtn = popup.querySelector('.close-btn');
 const popupNextBtn = document.querySelector("#popup-next-btn");
 const popupPrevBtn = document.querySelector("#popup-prev-btn");
 
@@ -63,6 +64,11 @@ const updateAttachInd = (ind) => {
     if (slidesInActiveTab === undefined || slidesInActiveTab?.length === 0) {
         attachmentIndex.innerHTML = `${ind} / 0`;
         return;
+    }
+    
+    openPopupBtn.classList.remove('hide');
+    if (sliderState[activeTabName][ind].type !== 1) {
+        openPopupBtn.classList.add('hide');
     }
 
     attachmentIndex.innerHTML = `${ind + 1} / ${slidesLenght}`;
@@ -508,7 +514,8 @@ popupPrevBtn.addEventListener("click", () => {
 
 
 carouselTrack.addEventListener('click', handleImageClick);
-closeBtn.addEventListener('click', closePopup);
+openPopupBtn.addEventListener('click', openMedia);
+closePopupBtn.addEventListener('click', closePopup);
 
 popup.addEventListener('click', (e) => {
     if (e.target.classList.value === "popup open") {

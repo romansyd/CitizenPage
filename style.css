@@ -75,7 +75,7 @@ section#slider {
     height: 100%;
 }
 
-.error-img{
+.error-img {
     background-color: #60acc4;
     color: white;
     position: absolute;
@@ -90,13 +90,21 @@ section#slider {
     font-size: 1.2em;
     padding-top: 50px;
 }
-.no-attach{
+
+.no-attach {
     padding: 50px;
     color: white;
     text-align: center;
     font-size: 1.2em;
     width: 100%;
 }
+
+.zoom-button {
+    position: absolute;
+    right: 0;
+    height: 40px;
+}
+
 .carousel-container {
     position: relative;
     bottom: 0;
@@ -408,6 +416,7 @@ audio::-webkit-media-controls-panel {
         align-items: center;
         justify-content: center;
     }
+
     .carousel-slide.video.vertical video {
         height: 100%;
         width: auto;
@@ -500,6 +509,7 @@ audio::-webkit-media-controls-panel {
         width: 100%;
         border-radius: 10px; */
     }
+
     .carousel-slide.video .media-wrapper {
         display: flex;
         align-items: center;
@@ -519,7 +529,7 @@ audio::-webkit-media-controls-panel {
         object-fit: contain;
         padding: 0 5px;
     }
-    
+
 
     .carousel-indicator .indicator {
         padding: 0 10px 0 10px;
