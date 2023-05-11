@@ -118,6 +118,9 @@ const appendCarouselSlides = (list = 'attachments') => {
 
         if (slide.type === 1) {
             template.classList.add('image');
+            template.querySelector('img').onerror = () => {
+                template.querySelector('img').outerHTML='<div class="error-img">לא ניתן להציג את התמונה</div>';
+            }
         }
 
         if (slide.type === 2) {
