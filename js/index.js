@@ -384,22 +384,22 @@ const showSlideButtons = () => {
     buttons.forEach(el => el.classList.remove('hide'));
 }
 
-// set ticket info in fields in section info 
+// set ticket info in fields in section info
 const setTicketInfo = () => {
     const { activeTab } = sliderState;
     const activeTabName = Texts.infoTabNames[activeTab];
     const infoData = sliderState[activeTabName];
 
     if (infoData?.ticketNo) {
-        ticket.number.parentElement.querySelector('span').textContent = "פתיחת פנייה:";
+        ticket.number.parentElement.querySelector('span').textContent = "מס' פנייה:";
         ticket.number.textContent = infoData.ticketNo;
     }
     if (infoData?.descr) {
-        ticket.description.parentElement.querySelector('span').textContent = "מס' פנייה:";
+        ticket.description.parentElement.querySelector('span').textContent = "תיאור פנייה:";
         ticket.description.textContent = infoData.descr;
     }
     if (infoData?.openDate) {
-        ticket.opendate.parentElement.querySelector('span').textContent = "תיאור פנייה:";
+        ticket.opendate.parentElement.querySelector('span').textContent = "פתיחת פנייה:";
         ticket.opendate.textContent = infoData.openDate;
     }
 }
