@@ -1,9 +1,15 @@
+@font-face {
+    font-family: Heebo;
+    src: url('font/Heebo-VariableFont_wght.ttf');
+}
+
 *,
 *::before,
 *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Heebo;
 }
 
 body {
@@ -303,7 +309,7 @@ audio::-webkit-media-controls-panel {
 
 .carousel-indicator .indicator {
     width: 100%;
-    font-weight: bold;
+    font-weight: 400;
     font-size: 1.1em;
     display: flex;
     justify-content: center;
@@ -317,6 +323,7 @@ audio::-webkit-media-controls-panel {
 
 .carousel-indicator .indicator.active {
     background: #60acc4;
+    font-weight: 600;
     border-radius: 10px 10px 0 0;
     color: #ffffff;
 }
