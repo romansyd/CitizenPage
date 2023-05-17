@@ -335,7 +335,7 @@ const createTemplateByType = (slide, i) => {
     }
 }
 
-const renderSlider = (idx = 0) => {
+const renderSlider = (idx = 1) => {
     carouselTrack.innerHTML = ``;
     activeSlideIndex = 0;
     showSlideButtons();
