@@ -61,11 +61,12 @@ section#info {
 
 section#info p {
     font-size: 1.1em;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 section#info span {
     font-size: 1.1em;
+    font-weight: bold;
 }
 
 section#slider {
