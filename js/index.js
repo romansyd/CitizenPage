@@ -168,25 +168,14 @@ const appendCarouselSlides = (list = 'attachments') => {
                 playPauseHandler(player, playButton);
             });
         }
+
         if (slide.type === 2) {
             /** Implementation of the presentation of the audio player */
 
             const playIconContainer = template.querySelector('.playpause');
             const audioPlayerContainer = template.querySelector('.audio-container');
             const seekSlider = template.querySelector('.seek-slider');
-            let playState = 'play';
-
-            playIconContainer.addEventListener('click', () => {
-                if (playState === 'play') {
-                    audio.play();
-                    requestAnimationFrame(whilePlaying);
-                    playState = 'pause';
-                } else {
-                    audio.pause();
-                    cancelAnimationFrame(raf);
-                    playState = 'play';
-                }
-            });
+            let playState = 'pause';
 
             const showRangeProgress = (rangeInput) => {
                 if (rangeInput === seekSlider) audioPlayerContainer.style.setProperty('--seek-before-width', rangeInput.value / rangeInput.max * 100 + '%');
@@ -197,13 +186,29 @@ const appendCarouselSlides = (list = 'attachments') => {
                 showRangeProgress(e.target);
             });
 
-
             /** Implementation of the functionality of the audio player */
 
             const audio = template.querySelector('audio');
             const durationContainer = template.querySelector('.duration');
             const currentTimeContainer = template.querySelector('.current-time');
             let raf = null;
+
+            playIconContainer.addEventListener('click', () => {
+                if (playState === 'pause') {
+                    audio.play();
+                    requestAnimationFrame(whilePlaying);
+                    playState = 'play';
+                } else {
+                    audio.pause();
+                    cancelAnimationFrame(raf);
+                    playState = 'pause';
+                }
+            });
+
+            audio.addEventListener('ended', () => {
+                audio.currentTime = 0
+                playState = 'pause';
+            })
 
             const calculateTime = (secs) => {
                 const minutes = Math.floor(secs / 60);
