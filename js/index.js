@@ -350,7 +350,13 @@ const renderSlider = (idx = 1) => {
         } else {
             const noSliders = document.createElement('div');
             noSliders.classList.add('no-attach');
-            noSliders.innerText = "לא ניתן להציג צרופה";
+            noSliders.innerHTML = `
+            <div class="no-attach-content">
+                <img src="./img/icons/no-attach.png">
+                <span>
+                    לא התקבלו מסמכים
+                </span>
+            </div>`;
             slidesLenght = 0;
             carouselTrack.innerHTML = '';
             carouselTrack.append(noSliders);

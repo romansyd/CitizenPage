@@ -95,9 +95,30 @@ section#slider {
 .no-attach {
     padding: 50px;
     color: white;
-    text-align: center;
     font-size: 1.2em;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-attach-content {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    width: 60%;
+    max-width: 400px;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0 5px 0 5px;
+}
+
+.no-attach-content img {
+    margin-bottom: 10px;
+    width: 40px;
 }
 
 .zoom-button {
