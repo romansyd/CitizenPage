@@ -6,6 +6,7 @@ let sliderState = {};
 let slides;
 let slidesLenght;
 let activeSlideIndex = 0;
+const startSliderTabIndex = 1;
 
 //for slide by swipes
 let touchstartX = 0;
@@ -340,7 +341,7 @@ const createTemplateByType = (slide, i) => {
     }
 }
 
-const renderSlider = (idx = 1) => {
+const renderSlider = (idx = startSliderTabIndex) => {
     carouselTrack.innerHTML = ``;
     activeSlideIndex = 0;
     showSlideButtons();
@@ -394,19 +395,41 @@ const setTicketInfo = () => {
     const { activeTab } = sliderState;
     const activeTabName = Texts.infoTabNames[activeTab];
     const infoData = sliderState[activeTabName];
+    let emptyFields = 0;
 
     if (infoData?.ticketNo) {
         ticket.number.parentElement.querySelector('span').textContent = "מס' פנייה:";
         ticket.number.textContent = infoData.ticketNo;
+    } else {
+        emptyFields++;
     }
+
     if (infoData?.descr) {
         ticket.description.parentElement.querySelector('span').textContent = "תיאור פנייה:";
         ticket.description.textContent = infoData.descr;
+    } else {
+        emptyFields++;
     }
+
     if (infoData?.openDate) {
         ticket.opendate.parentElement.querySelector('span').textContent = "פתיחת פנייה:";
         ticket.opendate.textContent = infoData.openDate;
+    } else {
+        emptyFields++;
     }
+
+    if (emptyFields === 3) {
+        wipeInfoSection();
+    }
+}
+
+const wipeInfoSection = () => {
+    ticket.opendate.parentElement.querySelector('span').textContent = "";
+    ticket.opendate.textContent = "";
+    ticket.number.parentElement.querySelector('span').textContent = "";
+    ticket.number.textContent = "";
+    ticket.description.parentElement.querySelector('span').textContent = "";
+    ticket.description.textContent = "";
 }
 
 const errorHandler = (data) => {
