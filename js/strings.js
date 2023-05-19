@@ -13,5 +13,6 @@ export const Texts = {
     infoTabNames: [
         'data',
         'outputData'
-    ]
+    ],
+    ticketTitle: "שלום רב, פנייתך טופלה"
 };
