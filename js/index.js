@@ -13,7 +13,7 @@ let touchstartX = 0;
 let touchendX = 0;
 
 // ticket data information
-
+const infoSection = document.getElementById("info");
 const ticket = {
     title: document.querySelector(".ticket-title"),
     opendate: document.querySelector(".ticket-opendate"),
@@ -392,44 +392,23 @@ const showSlideButtons = () => {
 
 // set ticket info in fields in section info
 const setTicketInfo = () => {
-    const { activeTab } = sliderState;
-    const activeTabName = Texts.infoTabNames[activeTab];
-    const infoData = sliderState[activeTabName];
-    let emptyFields = 0;
-
-    if (infoData?.ticketNo) {
+    infoSection.classList.remove("min-h-300");
+    ticket.title.textContent = Texts.ticketTitle;
+    
+    if (sliderState.data?.ticketNo) {
         ticket.number.parentElement.querySelector('span').textContent = "מס' פנייה:";
-        ticket.number.textContent = infoData.ticketNo;
-    } else {
-        emptyFields++;
+        ticket.number.textContent = sliderState.data.ticketNo;
     }
 
-    if (infoData?.descr) {
+    if (sliderState.data?.descr) {
         ticket.description.parentElement.querySelector('span').textContent = "תיאור פנייה:";
-        ticket.description.textContent = infoData.descr;
-    } else {
-        emptyFields++;
+        ticket.description.textContent = sliderState.data.descr;
     }
 
-    if (infoData?.openDate) {
+    if (sliderState.data?.openDate) {
         ticket.opendate.parentElement.querySelector('span').textContent = "פתיחת פנייה:";
-        ticket.opendate.textContent = infoData.openDate;
-    } else {
-        emptyFields++;
+        ticket.opendate.textContent = sliderState.data.openDate;
     }
-
-    if (emptyFields === 3) {
-        wipeInfoSection();
-    }
-}
-
-const wipeInfoSection = () => {
-    ticket.opendate.parentElement.querySelector('span').textContent = "";
-    ticket.opendate.textContent = "";
-    ticket.number.parentElement.querySelector('span').textContent = "";
-    ticket.number.textContent = "";
-    ticket.description.parentElement.querySelector('span').textContent = "";
-    ticket.description.textContent = "";
 }
 
 const errorHandler = (data) => {
