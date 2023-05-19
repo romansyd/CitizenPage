@@ -64,9 +64,11 @@ h2.ticket-title {
 section#info {
     margin-bottom: 20px;
 }
-.min-h-300{
-min-height: 300px;
+
+.min-h-300 {
+    min-height: 300px;
 }
+
 section#info p {
     font-size: 1.1em;
     /* font-weight: bold; */

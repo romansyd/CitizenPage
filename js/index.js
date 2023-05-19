@@ -394,18 +394,31 @@ const showSlideButtons = () => {
 const setTicketInfo = () => {
     infoSection.classList.remove("min-h-300");
     ticket.title.textContent = Texts.ticketTitle;
-    
-    if (sliderState.data?.ticketNo) {
+
+    const { activeTab } = sliderState;
+    const activeTabName = Texts.infoTabNames[activeTab];
+    const infoData = sliderState[activeTabName];
+
+    if (infoData?.ticketNo) {
+        ticket.number.parentElement.querySelector('span').textContent = "מס' פנייה:";
+        ticket.number.textContent = infoData.ticketNo;
+    } else if (sliderState?.data.ticketNo) {
         ticket.number.parentElement.querySelector('span').textContent = "מס' פנייה:";
         ticket.number.textContent = sliderState.data.ticketNo;
     }
 
-    if (sliderState.data?.descr) {
+    if (infoData?.descr) {
+        ticket.description.parentElement.querySelector('span').textContent = "תיאור פנייה:";
+        ticket.description.textContent = infoData.descr;
+    } else if (sliderState?.data.descr) {
         ticket.description.parentElement.querySelector('span').textContent = "תיאור פנייה:";
         ticket.description.textContent = sliderState.data.descr;
     }
 
-    if (sliderState.data?.openDate) {
+    if (infoData?.openDate) {
+        ticket.opendate.parentElement.querySelector('span').textContent = "פתיחת פנייה:";
+        ticket.opendate.textContent = infoData.openDate;
+    } else if (sliderState?.data.openDate) {
         ticket.opendate.parentElement.querySelector('span').textContent = "פתיחת פנייה:";
         ticket.opendate.textContent = sliderState.data.openDate;
     }
@@ -474,14 +487,6 @@ const openImage = () => {
     const activeImgSrc = activeSlide.querySelector('img').getAttribute('src');
     popupImg.setAttribute('src', activeImgSrc);
     popup.classList.add('open');
-}
-const openVideo = () => {
-    const id = activeSlideIndex;
-    const video = document.getElementById(`video_${id}`);
-}
-const openAudio = () => {
-    const id = activeSlideIndex;
-    const audio = document.getElementById(`audio_${id}`);
 }
 
 const closePopup = () => {
