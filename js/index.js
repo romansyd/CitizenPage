@@ -85,6 +85,7 @@ const changeTrack = () => {
         carouselTrack.style.width = `100%`;
         carouselTrack.style.transform = `translateX(0px)`;
     }
+    setTimeout(() => enableCarouselAnimation(true), 100)
 }
 
 // change current slide using arrow-buttons
@@ -116,6 +117,7 @@ const appendCarouselSlides = (list = 'attachments') => {
         template.append(createTemplateByType(slide, i));
         carouselTrack.append(template);
         template.innerHTML = createTemplateByType(slide, i);
+
         if (slide.type === 3 || slide.type === 2) {
             template.querySelector('source').addEventListener("error", (e) => {
                 const videoToLink = { ...slide, type: 4 }
@@ -390,6 +392,14 @@ const showSlideButtons = () => {
     buttons.forEach(el => el.classList.remove('hide'));
 }
 
+const enableCarouselAnimation = (value) => {
+    if (value) {
+        carouselTrack.classList.add("animation");
+    } else {
+        carouselTrack.classList.remove("animation");
+    }
+}
+
 // set ticket info in fields in section info
 const setTicketInfo = () => {
     infoSection.classList.remove("min-h-300");
@@ -526,7 +536,9 @@ start();
 window.addEventListener('offline', offlineModeHandler, true);
 
 indList.addEventListener("click", e => {
+    enableCarouselAnimation(false);
     let target = e.target;
+
     if (target.classList.contains("indicator")) {
         renderSlider(+target.dataset.index);
     }

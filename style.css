@@ -161,8 +161,11 @@ section#slider {
     width: 200%;
     position: relative;
     display: flex;
-    transition: 500ms ease-out;
     border-radius: 20px;
+}
+
+.animation {
+    transition: 500ms ease-out;
 }
 
 .shading-strip {
@@ -534,14 +537,14 @@ audio::-webkit-media-controls-panel {
         align-self: self-end;
     }
 
-    .carousel-slide img {
-        /* position: absolute;
+    /* .carousel-slide img {
+        position: absolute;
         object-fit:contain;
         align-self: center;
         height: 100%;
         width: 100%;
-        border-radius: 10px; */
-    }
+        border-radius: 10px;
+    } */
 
     .carousel-slide.video .media-wrapper {
         display: flex;
