@@ -244,7 +244,7 @@ audio::-webkit-media-controls-panel {
 }
 
 .carousel-slide a[download] {
-    height: 50px;
+    min-height: 50px;
     width: 60%;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
