@@ -117,13 +117,12 @@ section#slider {
     background: rgba(0, 0, 0, 0.6);
     width: 60%;
     max-width: 400px;
-    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    padding: 0 5px 0 5px;
+    padding: 10px 5px 10px 5px;
 }
 
 .no-attach-content img {
